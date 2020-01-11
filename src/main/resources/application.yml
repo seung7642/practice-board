@@ -1,1 +1,8 @@
-
+# DB 설정
+spring:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: mysql://{url}:{port}/{db}
+      username: pangtrue
+      password: pangtrue1234!@#$
