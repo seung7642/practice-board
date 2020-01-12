@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 
 <mapper namespace="com.neowiz.practice.board.application.board.dao.BoardMapper">
-    <select id="getArticle" resultType="board">
+    <select id="getArticle" resultMap="Board">
         SELECT
               idx
             , title
@@ -14,10 +14,24 @@
             BOARD_TBL
     </select>
 
-    <select id="getArticleList" resultType="board">
+    <select id="getArticleList" resultMap="Board">
+        <![CDATA[
         SELECT
             *
         FROM
             BOARD_TBL
+        WHERE idx > 0
+        ]]>
+    </select>
+
+    <select id="getArticleCount" resultMap="Board">
+        <![CDATA[
+        SELECT
+            COUNT(idx)
+        FROM
+            BOARD_TBL
+        WHERE
+            idx > 0
+        ]]>
     </select>
 </mapper>
