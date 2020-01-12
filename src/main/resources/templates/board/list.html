@@ -1,6 +1,5 @@
-{% extends "board/base" %}
+{% extends "/board/base.html" %}
 {% block content %}
-<script type="text/javascript" src="{{ request.contextPath }}/resources/static/js/index.js"></script>
 <div>
     <form name="frm" method="get">
         <input type="hidden" name="pageNo" value="{{ search.pageNo }}">
