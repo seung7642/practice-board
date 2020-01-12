@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface BoardService {
 
+    Board getArticle();
+
     List<Board> getArticleList();
 }

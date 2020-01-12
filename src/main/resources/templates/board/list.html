@@ -1,6 +1,6 @@
 {% extends "board/base" %}
 {% block content %}
-<script type="text/javascript" src="{{ request.contextPath }}/resources/js/board.js"></script>
+<script type="text/javascript" src="{{ request.contextPath }}/resources/static/js/index.js"></script>
 <div>
     <form name="frm" method="get">
         <input type="hidden" name="pageNo" value="{{ search.pageNo }}">
@@ -11,18 +11,18 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">제목</th>
-            <th scope="col">내용</th>
-            <th scope="col">점수</th>
+            <th scope="col">글쓴이</th>
+            <th scope="col">조회수</th>
             <th scope="col">등록일</th>
         </tr>
         </thead>
         <tbody>
         {% for board in boardList %}
         <tr>
-            <th scope="row">{{ board.id }}</th>
+            <th scope="row">{{ board.idx }}</th>
             <td>{{ board.title }}</td>
-            <td>{{ board.content }}</td>
-            <td>{{ board.score }}</td>
+            <td>{{ board.writer }}</td>
+            <td>{{ board.hits }}</td>
             <td>{{ board.regDate }}</td>
         </tr>
         {% else %}

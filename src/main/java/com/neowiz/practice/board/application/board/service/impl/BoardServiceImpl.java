@@ -11,6 +11,12 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     @Override
+    public Board getArticle() {
+
+        return new Board();
+    }
+
+    @Override
     public List<Board> getArticleList() {
         List<Board> list = new ArrayList<>();
 
