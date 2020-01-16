@@ -1,4 +1,4 @@
-package com.neowiz.practice.board.application.board.domain;
+package com.practice.board.application.board.domain;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;

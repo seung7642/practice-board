@@ -1,4 +1,4 @@
-package com.neowiz.practice.board.application.index.web;
+package com.practice.board.application.index.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

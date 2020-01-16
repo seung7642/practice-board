@@ -1,4 +1,4 @@
-package com.neowiz.practice.board.Configuration;
+package com.practice.board.Configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

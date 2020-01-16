@@ -1,8 +1,7 @@
-package com.neowiz.practice.board.application.board.dao;
+package com.practice.board.application.board.dao;
 
-import com.neowiz.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.domain.Board;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.type.Alias;
 
 import java.util.List;
 

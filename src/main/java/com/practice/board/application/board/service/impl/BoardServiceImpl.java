@@ -1,8 +1,8 @@
-package com.neowiz.practice.board.application.board.service.impl;
+package com.practice.board.application.board.service.impl;
 
-import com.neowiz.practice.board.application.board.dao.BoardMapper;
-import com.neowiz.practice.board.application.board.domain.Board;
-import com.neowiz.practice.board.application.board.service.BoardService;
+import com.practice.board.application.board.dao.BoardMapper;
+import com.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

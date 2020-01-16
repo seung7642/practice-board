@@ -1,4 +1,4 @@
-package com.neowiz.practice.board;
+package com.practice.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

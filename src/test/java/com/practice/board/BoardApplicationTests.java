@@ -1,4 +1,4 @@
-package com.neowiz.practice.board;
+package com.practice.board;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.neowiz.practice.board.application.index.service;
+package com.practice.board.application.index.service;
 
 import org.springframework.stereotype.Service;
 
