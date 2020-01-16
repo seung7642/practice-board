@@ -6,11 +6,27 @@ import org.apache.ibatis.type.Alias;
 
 import java.util.List;
 
-@Alias("Board")
 @Mapper
 public interface BoardMapper {
-    
+
+    /**
+     * 게시글 1개를 가져온다.
+     *
+     * @return Board
+     */
     Board getArticle();
+
+    /**
+     * 전체 게시글 리스트를 가져온다.
+     *
+     * @return List<Board>
+     */
     List<Board> getArticleList();
+
+    /**
+     * 전체 게시글의 갯수를 가져온다.
+     *
+     * @return
+     */
     int getArticleCount();
 }
