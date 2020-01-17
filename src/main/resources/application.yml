@@ -1,8 +1,26 @@
-# DB 설정
+# 로그 설정 ( 후에 slf4j를 사용해서 로그 찍을거임 )
+logging.level:
+  org.springframework: INFO
+  com.neowiz: DEBUG
+
+# Pebble 설정
+pebble:
+  enabled: true
+  prefix: /templates/
+  suffix: .html
+  cache: false
+  contentType: text/html
+  encoding: UTF-8
+  exposeRequestAttributes: false
+  exposeSessionAttributes: false
+  defaultLocale: ko_KR
+  strictVariables: false
+
+# DB 커넥션 정보 ( Driver Class는 따로 안 적어주나? )
 spring:
   datasource:
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/practice_board
-      username: pangtrue
-      password: pangtrue1234!@#$
+      jdbc-url: jdbc:mysql://10.30.173.134:3306/free_board2?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+      username: board_admin2
+      password: board_admin2!!!
+      connection-test-query: SELECT 1 FROM DUAL
