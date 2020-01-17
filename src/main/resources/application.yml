@@ -6,3 +6,7 @@ spring:
       jdbc-url: jdbc:mysql://localhost:3306/practice_board
       username: pangtrue
       password: pangtrue1234!@#$
+
+# Pebble 설정
+pebble:
+  

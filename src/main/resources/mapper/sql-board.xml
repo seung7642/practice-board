@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 
 <mapper namespace="com.practice.board.application.board.dao.BoardMapper">
-    <select id="getArticle" resultMap="Board">
+    <select id="getArticle" resultType="Board">
         SELECT
               idx
             , title
@@ -14,24 +14,19 @@
             BOARD_TBL
     </select>
 
-    <select id="getArticleList" resultMap="Board">
-        <![CDATA[
+    <select id="getArticleList" resultType="Board">
         SELECT
             *
         FROM
             BOARD_TBL
-        WHERE idx > 0
-        ]]>
+        ORDER BY
+            idx DESC
     </select>
 
-    <select id="getArticleCount" resultMap="Board">
-        <![CDATA[
+    <select id="getArticleCount" resultType="Integer">
         SELECT
             COUNT(idx)
         FROM
             BOARD_TBL
-        WHERE
-            idx > 0
-        ]]>
     </select>
 </mapper>
