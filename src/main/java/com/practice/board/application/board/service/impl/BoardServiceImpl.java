@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    private final BoardMapper boardMapper;
+    private BoardMapper boardMapper;
 
     @Autowired
     public BoardServiceImpl(BoardMapper boardMapper) { this.boardMapper = boardMapper; }
@@ -28,5 +28,10 @@ public class BoardServiceImpl implements BoardService {
         List<Board> list = new ArrayList<>();
 
         return list;
+    }
+
+    @Override
+    public int getArticleCount() {
+        return boardMapper.getArticleCount();
     }
 }

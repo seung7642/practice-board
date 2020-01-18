@@ -19,4 +19,12 @@ public interface BoardService {
      * @return
      */
     List<Board> getArticleList();
+
+    /**
+     * 전체 게시글의 갯수를 가져온다.
+     *
+     * @return int
+     */
+    int getArticleCount();
+
 }

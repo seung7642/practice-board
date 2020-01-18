@@ -16,10 +16,11 @@ pebble:
   defaultLocale: ko_KR
   strictVariables: false
 
-# DB 커넥션 정보 ( Driver Class는 따로 안 적어주나? )
+# DB 커넥션 정보
 spring:
   datasource:
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
-      username: board_admin2
-      password: board_admin2!!!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+      username: pangtrue
+      password: pangtrue1234!@#$
