@@ -1,6 +1,7 @@
 package com.practice.board.application.board.domain;
 
 import lombok.Data;
+import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;

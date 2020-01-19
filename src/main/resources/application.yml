@@ -20,7 +20,7 @@ pebble:
 spring:
   datasource:
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
       username: pangtrue
       password: pangtrue1234!@#$

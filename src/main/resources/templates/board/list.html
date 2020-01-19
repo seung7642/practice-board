@@ -5,7 +5,7 @@
         <input type="hidden" name="pageNo" value="">
     </form>
 <!--    Total : {{ search.totalCount }}-->
-    Total :
+    Total : {{ total }}
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -19,7 +19,7 @@
         <tbody>
         {% for board in boardList %}
         <tr>
-            <th scope="row">{{ board.idx }}</th>
+            <th scope="row">{{ loop.length - loop.index }}</th>
             <td>{{ board.title }}</td>
             <td>{{ board.writer }}</td>
             <td>{{ board.hits }}</td>

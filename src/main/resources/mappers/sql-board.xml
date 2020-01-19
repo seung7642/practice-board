@@ -41,5 +41,6 @@
             , #{content}
             , #{writer}
             , #{regDate}
+        )
     </insert>
 </mapper>

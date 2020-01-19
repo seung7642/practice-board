@@ -7,27 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
 
     @Autowired
     public BoardServiceImpl(BoardMapper boardMapper) { this.boardMapper = boardMapper; }
 
     @Override
     public Board getArticle() {
-
         return new Board();
     }
 
     @Override
     public List<Board> getArticleList() {
-        List<Board> list = new ArrayList<>();
-
-        return list;
+        return boardMapper.getArticleList();
     }
 
     @Override
@@ -37,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void insertArticle(Board board) {
+        board.setRegDate(new Date());
         boardMapper.insertArticle(board);
     }
 }
