@@ -27,4 +27,10 @@ public interface BoardService {
      */
     int getArticleCount();
 
+    /**
+     * 게시글 하나를 저장한다.
+     *
+     * @param board
+     */
+    void insertArticle(Board board);
 }

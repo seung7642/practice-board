@@ -34,4 +34,9 @@ public class BoardServiceImpl implements BoardService {
     public int getArticleCount() {
         return boardMapper.getArticleCount();
     }
+
+    @Override
+    public void insertArticle(Board board) {
+        boardMapper.insertArticle(board);
+    }
 }

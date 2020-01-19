@@ -27,7 +27,14 @@ public interface BoardMapper {
     /**
      * 전체 게시글의 갯수를 가져온다.
      *
-     * @return
+     * @return int
      */
     int getArticleCount();
+
+    /**
+     * 게시글 하나를 저장한다.
+     *
+     * @param board
+     */
+    void insertArticle(Board board);
 }

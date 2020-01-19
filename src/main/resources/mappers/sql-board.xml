@@ -29,4 +29,17 @@
         FROM
             BOARD_TBL
     </select>
+
+    <insert id="insertArticle" parameterType="Board">
+        INSERT INTO BOARD_TBL (
+              title
+            , content
+            , writer
+            , reg_date
+        ) VALUES (
+              #{title}
+            , #{content}
+            , #{writer}
+            , #{regDate}
+    </insert>
 </mapper>
