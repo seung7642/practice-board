@@ -2,9 +2,10 @@
 {% block content %}
 <div>
     <form name="frm" method="get">
-        <input type="hidden" name="pageNo" value="{{ search.pageNo }}">
+        <input type="hidden" name="pageNo" value="">
     </form>
-    Total : {{ search.totalCount }}
+<!--    Total : {{ search.totalCount }}-->
+    Total :
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -31,7 +32,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <!--   페이징 처리 -->
-    {% include '/layout/paging' %}
 </div>
 {% endblock %}

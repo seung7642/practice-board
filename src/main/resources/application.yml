@@ -1,7 +1,7 @@
 # 로그 설정 ( 후에 slf4j를 사용해서 로그 찍을거임 )
 logging.level:
   org.springframework: INFO
-  com.neowiz: DEBUG
+  com.practice: DEBUG
 
 # Pebble 설정
 pebble:

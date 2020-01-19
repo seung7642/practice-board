@@ -40,8 +40,8 @@
                     <div class="box-footer">
                         <button type="button" class="btn btn-primary"><i class="fa fa-list"></i> 목록</button>
                         <div class="pull-right">
-                            <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                            <button type="reset" class="btn btn-warning">초기화</button>
+                            <button type="submit" class="btn btn-success" onclick="insert()">저장</button>
                         </div>
                     </div>
                 </div>
@@ -56,8 +56,27 @@
 
 {% block script %}
 <script>
-    function insert() {
-        $.ajax()
-    }
+function insert() {
+    $.ajax({
+        url: "/board/write",
+        type: "post",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({
+              title: $("#title").val()
+            , content: $("#content").val()
+            , writer: $("#writer").val()
+        }),
+        success: function(resultData) {
+            if (resultData !== 0) {
+                console.log("insert 데이터 정상 처리");
+            }
+        }
+    });
+}
+
+$(document).ready(function() {
+
+})
 </script>
 {% endblock %}

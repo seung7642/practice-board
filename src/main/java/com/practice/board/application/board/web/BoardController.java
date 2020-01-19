@@ -36,6 +36,7 @@ public class BoardController {
 
     @PostMapping(value = "/write")
     public String write(@RequestBody Board board) {
+//        log.info("JSON으로 넘어온 데이터 : {}", board.toString());
         boardService.insertArticle(board);
 
         return "redirect:/board/list";
