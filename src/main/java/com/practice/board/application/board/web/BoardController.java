@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/board")
 public class BoardController {
 
-    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
     private final BoardService boardService;
 
     @Autowired
@@ -38,7 +37,7 @@ public class BoardController {
     @ResponseBody
     @PostMapping(value = "/write")
     public String write(@RequestBody Board board) { // @RequestBody와 @RequestParam은 무슨 차이지 ?
-        logger.info("JSON으로 넘어온 데이터 : {}", board.toString());
+        log.info("JSON으로 넘어온 데이터 : {}", board.toString());
         boardService.insertArticle(board);
 
         return "redirect:/board/list";
