@@ -21,7 +21,13 @@ public class BoardRestController {
 
     @PostMapping(value = "/write")
     public String write(@RequestBody Board board) {
+//        log.info("JSON으로 넘어온 데이터 : {}", board.toString());
 
+        try {
+            boardService.insertArticle(board);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/board/list";
     }
 }

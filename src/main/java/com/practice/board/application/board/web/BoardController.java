@@ -23,8 +23,14 @@ public class BoardController {
 
     @GetMapping(value = "/list")
     public ModelAndView list(ModelAndView mnv) {
-        mnv.addObject("total", boardService.getArticleCount());
-        mnv.addObject("boardList", boardService.getArticleList());
+
+        try {
+            mnv.addObject("total", boardService.getArticleCount());
+            mnv.addObject("boardList", boardService.getArticleList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mnv.setViewName("/board/list");
         return mnv;
     }
@@ -35,12 +41,4 @@ public class BoardController {
         return mnv;
     }
 
-    @ResponseBody
-    @PostMapping(value = "/write")
-    public String write(@RequestBody Board board) { // @RequestBody와 @RequestParam은 무슨 차이지 ?
-        logger.info("JSON으로 넘어온 데이터 : {}", board.toString());
-        boardService.insertArticle(board);
-
-        return "redirect:/board/list";
-    }
 }
