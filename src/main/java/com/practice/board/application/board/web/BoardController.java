@@ -39,8 +39,20 @@ public class BoardController {
     @PostMapping(value = "/write")
     public String write(@RequestBody Board board) { // @RequestBody와 @RequestParam은 무슨 차이지 ?
         logger.info("JSON으로 넘어온 데이터 : {}", board.toString());
-        boardService.insertArticle(board);
+
+        try {
+            boardService.insertArticle(board);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return "redirect:/board/list";
+    }
+
+    @GetMapping(value = "/read")
+    public ModelAndView read(@RequestParam("idx") int idx, ModelAndView mnv) {
+
+        mnv.setViewName("/board/read");
+        return mnv;
     }
 }

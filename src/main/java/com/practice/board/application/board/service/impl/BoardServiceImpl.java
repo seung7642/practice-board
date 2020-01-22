@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void insertArticle(Board board) {
-        board.setRegDate(new Date());
+//        board.setRegDate(new Date());  // 왜 setter 에러나지?
         boardMapper.insertArticle(board);
     }
 }
