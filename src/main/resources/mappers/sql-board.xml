@@ -16,13 +16,22 @@
             idx = #{idx}
     </select>
 
-    <select id="getArticleList" resultType="Board">
+    <select id="getArticleList" resultType="Board" parameterType="Criteria">
+        SET @rownum := 0;
         SELECT
-            *
+        idx
+        , title
+        , content
+        , writer
+        , reg_date
+        , upd_date
+        , hits
+        , @rownum := @rownum + 1 as rn
         FROM
-            BOARD_TBL
+        free_board2.BOARD_TBL
         ORDER BY
-            idx DESC
+        idx DESC
+        LIMIT #{pageNum}, #{amount};
     </select>
 
     <select id="getArticleCount" resultType="Integer">

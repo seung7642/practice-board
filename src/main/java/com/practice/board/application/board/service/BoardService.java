@@ -20,7 +20,7 @@ public interface BoardService {
      *
      * @return
      */
-    List<Board> getArticleList() throws Exception;
+    List<Board> getArticleList(Criteria criteria) throws Exception;
 
     /**
      * 전체 게시글의 갯수를 가져온다.

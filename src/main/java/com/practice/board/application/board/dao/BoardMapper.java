@@ -1,6 +1,7 @@
 package com.practice.board.application.board.dao;
 
 import com.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.domain.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ public interface BoardMapper {
     /**
      * 게시글 1개를 가져온다.
      *
+     * @param idx
      * @return Board
      */
     Board getArticle(Integer idx);
@@ -20,9 +22,10 @@ public interface BoardMapper {
     /**
      * 전체 게시글 리스트를 가져온다.
      *
+     * @param criteria
      * @return List<Board>
      */
-    List<Board> getArticleList();
+    List<Board> getArticleList(Criteria criteria);
 
     /**
      * 전체 게시글의 갯수를 가져온다.

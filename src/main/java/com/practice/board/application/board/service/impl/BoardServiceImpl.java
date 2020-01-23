@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> getArticleList() throws Exception {
-        return boardMapper.getArticleList();
+    public List<Board> getArticleList(Criteria criteria) throws Exception {
+        return boardMapper.getArticleList(criteria);
     }
 
     @Override
