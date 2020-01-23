@@ -2,6 +2,8 @@ package com.practice.board.application.board.service.impl;
 
 import com.practice.board.application.board.dao.BoardMapper;
 import com.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.domain.Criteria;
+import com.practice.board.application.board.domain.PageMaker;
 import com.practice.board.application.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void updateHits(Integer idx) throws Exception {
         boardMapper.updateHits(idx);
+    }
+
+    @Override
+    public PageMaker getPageMaker(Criteria criteria) throws Exception {
+        return new PageMaker(criteria, getArticleCount());
     }
 }

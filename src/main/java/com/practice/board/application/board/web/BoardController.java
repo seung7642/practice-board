@@ -1,6 +1,7 @@
 package com.practice.board.application.board.web;
 
 import com.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.domain.Criteria;
 import com.practice.board.application.board.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -21,10 +22,13 @@ public class BoardController {
     public BoardController(BoardService boardService) { this.boardService = boardService; }
 
     @GetMapping(value = "/list")
-    public ModelAndView list(ModelAndView mnv) {
+    public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+                           , @RequestParam(value = "amount", defaultValue = "10") int amount, ModelAndView mnv) {
+        log.info("쿼리 스트링으로 넘어온 값 : [ {}, {} ]", pageNum, amount);
 
+        Criteria criteria = new Criteria(pageNum, amount);
         try {
-            mnv.addObject("total", boardService.getArticleCount());
+            mnv.addObject("pageMaker", boardService.getPageMaker(criteria));
             mnv.addObject("boardList", boardService.getArticleList());
         } catch (Exception e) {
             e.printStackTrace();

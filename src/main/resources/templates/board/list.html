@@ -1,17 +1,19 @@
-{% extends "board/base" %}
+{% extends "board/base" %} <!-- Parent Template declared -->
+
 {% block content %}
 <div>
-    <form name="frm" method="get">
-        <input type="hidden" name="pageNo" value="">
+    <form id="actionForm" method="GET" action="/board/list">
+        <input type="hidden" name="pageNum" value="{{ pageMaker.criteria.pageNum }}">
+        <input type="hidden" name="amount" value="{{ pageMaker.criteria.amount }}">
     </form>
-<!--    Total : {{ search.totalCount }}-->
-    Total : {{ total }}
+
+    Total : {{ pageMaker.totalArticleCount }}
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">글번호</th>
             <th scope="col">제목</th>
-            <th scope="col">글쓴이</th>
+            <th scope="col">내용</th>
             <th scope="col">조회수</th>
             <th scope="col">등록일</th>
         </tr>
@@ -20,10 +22,14 @@
         {% for board in boardList %}
         <tr>
             <th scope="row">{{ loop.length - loop.index }}</th>
-            <td>{{ board.title }}</td>
-            <td>{{ board.writer }}</td>
+            <td><a href="/board/read?idx={{ board.idx }}">{{ board.title }}</a></td>
+            <td>{% autoescape false %}
+                {% set content = board.content | split("<br") %}
+                {{ content[0] }}
+                {% endautoescape %}
+            </td>
             <td>{{ board.hits }}</td>
-            <td>{{ board.regDate }}</td>
+            <td>{{ board.regDate | date("yyyy-MM-dd HH:mm") }}</td>
         </tr>
         {% else %}
         <tr>
@@ -32,5 +38,33 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="pagination-list">
+        <<
+        <a href="/board/list?pageNum={{ pageMaker.firstPage }}">처음</a>
+        <a href="/board/list?pageNum={{ pageMaker.prevPage }}">이전</a>
+        {% for  i in range(pageMaker.startPage, pageMaker.endPage) %}
+        <span class="pagination-button">
+            <a href="/board/list?pageNum={{ i }}">{{ i }}</a>
+        </span>
+        {% endfor %}
+        <a href="/board/list?pageNum={{ pageMaker.nextPage }}">다음</a>
+        <a href="/board/list?pageNum={{ pageMaker.lastPage }}">마지막</a>
+        >>
+    </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+
+        // $(".pagination-button a").on("click", function(e) {
+        //     console.log("페이지 목록 넘버 클릭");
+        //
+        //     e.preventDefault(); // a 태그에 걸린 이벤트 끄기
+        //     $("#actionForm").find("input[name='pageNum']").val($(this).attr("href"));
+        // });
+    })
+</script>
 {% endblock %}

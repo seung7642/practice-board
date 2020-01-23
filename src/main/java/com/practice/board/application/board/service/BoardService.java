@@ -1,6 +1,8 @@
 package com.practice.board.application.board.service;
 
 import com.practice.board.application.board.domain.Board;
+import com.practice.board.application.board.domain.Criteria;
+import com.practice.board.application.board.domain.PageMaker;
 
 import java.util.List;
 
@@ -40,4 +42,12 @@ public interface BoardService {
      * @return void
      */
     void updateHits(Integer idx) throws Exception;
+
+    /**
+     * 페이징을 위한 PageMaker를 구한다.
+     *
+     * @param criteria
+     * @return PageMaker
+     */
+    PageMaker getPageMaker(Criteria criteria) throws Exception;
 }
