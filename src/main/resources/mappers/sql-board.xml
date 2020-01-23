@@ -32,7 +32,7 @@
             BOARD_TBL
     </select>
 
-    <insert id="insertArticle" parameterType="Board">
+    <insert id="insertArticle" parameterType="Board" useGeneratedKeys="true" keyProperty="idx">
         INSERT INTO BOARD_TBL (
               title
             , content
