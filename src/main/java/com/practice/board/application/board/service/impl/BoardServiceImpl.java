@@ -19,23 +19,28 @@ public class BoardServiceImpl implements BoardService {
     public BoardServiceImpl(BoardMapper boardMapper) { this.boardMapper = boardMapper; }
 
     @Override
-    public Board getArticle() {
+    public Board getArticle(Integer idx) throws Exception {
         return new Board();
     }
 
     @Override
-    public List<Board> getArticleList() {
+    public List<Board> getArticleList() throws Exception {
         return boardMapper.getArticleList();
     }
 
     @Override
-    public int getArticleCount() {
+    public int getArticleCount() throws Exception {
         return boardMapper.getArticleCount();
     }
 
     @Override
-    public void insertArticle(Board board) {
-//        board.setRegDate(new Date());  // 왜 setter 에러나지?
+    public void insertArticle(Board board) throws Exception {
+        board.setRegDate(new Date());  // 왜 setter 에러나지?
         boardMapper.insertArticle(board);
+    }
+
+    @Override
+    public void updateHits(Integer idx) throws Exception {
+        boardMapper.updateHits(idx);
     }
 }

@@ -15,7 +15,7 @@ public interface BoardMapper {
      *
      * @return Board
      */
-    Board getArticle();
+    Board getArticle(Integer idx);
 
     /**
      * 전체 게시글 리스트를 가져온다.
@@ -37,4 +37,11 @@ public interface BoardMapper {
      * @param board
      */
     void insertArticle(Board board);
+
+    /**
+     * 조회수를 +1 시킨다.
+     *
+     * @param idx
+     */
+    void updateHits(Integer idx);
 }

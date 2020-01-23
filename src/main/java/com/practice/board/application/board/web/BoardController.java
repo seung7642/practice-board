@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/board")
 public class BoardController {
 
-    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
     private final BoardService boardService;
 
     @Autowired
@@ -31,14 +30,28 @@ public class BoardController {
             e.printStackTrace();
         }
 
-        mnv.setViewName("/board/list");
+        mnv.setViewName("board/list");
         return mnv;
     }
 
     @GetMapping(value = "/write")
     public ModelAndView write(ModelAndView mnv) {
-        mnv.setViewName("/board/write");
+        mnv.setViewName("board/write");
         return mnv;
     }
 
+    @GetMapping(value = "/read")
+    public ModelAndView read(@RequestParam("idx") Integer idx, ModelAndView mnv) {
+        log.info("읽고자하는 글 번호 : {}", idx);
+
+        try {
+            boardService.updateHits(idx);
+            mnv.addObject("article", boardService.getArticle(idx));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mnv.setViewName("board/read");
+        return mnv;
+    }
 }

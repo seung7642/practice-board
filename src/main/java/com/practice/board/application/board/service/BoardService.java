@@ -11,26 +11,33 @@ public interface BoardService {
      *
      * @return Board
      */
-    Board getArticle();
+    Board getArticle(Integer idx) throws Exception;
 
     /**
      * 전체 게시글의 리스트를 가져온다.
      *
      * @return
      */
-    List<Board> getArticleList();
+    List<Board> getArticleList() throws Exception;
 
     /**
      * 전체 게시글의 갯수를 가져온다.
      *
      * @return int
      */
-    int getArticleCount();
+    int getArticleCount() throws Exception;
 
     /**
      * 게시글 하나를 저장한다.
      *
      * @param board
      */
-    void insertArticle(Board board);
+    void insertArticle(Board board) throws Exception;
+
+    /**
+     * 조회수를 +1 시킨다.
+     *
+     * @return void
+     */
+    void updateHits(Integer idx) throws Exception;
 }

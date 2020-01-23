@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 
 <mapper namespace="com.practice.board.application.board.dao.BoardMapper">
-    <select id="getArticle" resultType="Board">
+    <select id="getArticle" resultType="Board" parameterType="Integer">
         SELECT
               idx
             , title
@@ -12,6 +12,8 @@
             , hits
         FROM
             BOARD_TBL
+        WHERE
+            idx = #{idx}
     </select>
 
     <select id="getArticleList" resultType="Board">
@@ -43,4 +45,13 @@
             , #{regDate}
         )
     </insert>
+
+    <update id="updateHits" parameterType="Integer">
+        UPDATE
+            BOARD_TBL
+        SET
+            hits = hits + 1
+        WHERE
+            idx = #{idx}
+    </update>
 </mapper>
