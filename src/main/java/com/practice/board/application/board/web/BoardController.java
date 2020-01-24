@@ -1,5 +1,6 @@
 package com.practice.board.application.board.web;
 
+import com.mysql.cj.log.LogFactory;
 import com.practice.board.application.board.domain.Board;
 import com.practice.board.application.board.domain.Criteria;
 import com.practice.board.application.board.service.BoardService;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/board")
 public class BoardController {
 
+    private static final Logger log = LoggerFactory.getLogger(BoardController.class);
     private final BoardService boardService;
 
     @Autowired
@@ -29,7 +31,7 @@ public class BoardController {
         Criteria criteria = new Criteria(pageNum, amount);
         try {
             mnv.addObject("pageMaker", boardService.getPageMaker(criteria));
-            mnv.addObject("boardList", boardService.getArticleList());
+            mnv.addObject("boardList", boardService.getArticleList(criteria));
         } catch (Exception e) {
             e.printStackTrace();
         }
