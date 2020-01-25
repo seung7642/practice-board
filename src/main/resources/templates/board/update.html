@@ -1,92 +1,123 @@
-{% extends "board/base" %}
+{% extends "board/base" %} <!-- Parent Template declared -->
 
 {% block content %}
-<article>
-    <div class="container" role="main">
-        <h2>board Form</h2>
-        <form name="form" id="form" role="form" method="GET" action="/board/list">
-            <div class="mb-3">
-                <label for="title">제목</label>
-                <input type="text" class="form-control" name="title" id="title" value="{{ article.title }}">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">게시글 수정</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Board Update</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
             </div>
-            <div class="mb-3">
-                <label for="writer">작성자</label>
-                <input type="text" class="form-control" name="writer" id="writer" value="{{ article.writer }}">
-            </div>
-            <div class="mb-3">
-                <label for="content">내용</label>
-                <textarea class="form-control" rows="5" name="content" id="content">{{ article.content }}</textarea>
-            </div>
-            <div class="mb-3">
-                <input type="hidden" class="form-control" name="idx" id="idx" value="{{ article.idx }}">
-            </div>
-        </form>
-        <div >
-            <button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+            <!-- /.row -->
         </div>
+        <!-- /.container-fluid -->
     </div>
-</article>
+    <!-- /.content-header -->
+
+    <!-- Main Content -->
+    <article class="content container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="form" id="form" role="form" method="GET" action="/board/list">
+                    <div class="mb-3">
+                        <label for="title">제목</label>
+                        <input type="text" class="form-control" name="title" id="title" value="{{ article.title }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="writer">작성자</label>
+                        <input type="text" class="form-control" name="writer" id="writer" value="{{ article.writer }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content">내용</label>
+                        <textarea class="form-control" rows="5" name="content" id="content">{{ article.content }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" class="form-control" name="idx" id="idx" value="{{ article.idx }}">
+                    </div>
+                </form>
+                <div >
+                    <button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </article>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 {% endblock %}
 
 {% block script %}
 <script src="/ckeditor/ckeditor.js"></script>
 <script>
-function validator() {
-    // 제목 또는 내용이 비어있다면
-    if ($("#title").val() == '' || $("#content").val() == '') {
-        alert("제목 또는 내용을 입력하세요 !");
-        return false;
-    }
-}
-
-function update() {
-    const isOk = validator();
-    if (isOk) {
-        return;
-    }
-
-    $.ajax({
-        url: "/board/update",
-        type: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "idx" : $("#idx").val(),
-            "title" : $("#title").val(),
-            "writer" : $("#writer").val(),
-            "content" : CKEDITOR.instances.content.getData()
-        }),
-        success: function(result) {
-            console.log(result)
-            if (result.idx !== 0) {
-                alert("글쓰기 수정 완료 !")
-
-                // 성공했다면, /board/read로 이동
-                window.location.href = '/board/read?idx=' + result.idx;
-            } else {
-                alert("Error !!");
-
-                // 실패했다면, /board/write에 남아있는채로 에러 메시지 띄우기
-            }
-        },
-        error: function(xhr, status, error) {
-            alert("Error !");
+    function validator() {
+        // 제목 또는 내용이 비어있다면
+        if ($("#title").val() == '' || $("#content").val() == '') {
+            alert("제목 또는 내용을 입력하세요 !");
+            return false;
         }
+    }
+
+    function update() {
+        const isOk = validator();
+        if (isOk) {
+            return;
+        }
+
+        $.ajax({
+            url: "/board/update",
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "idx" : $("#idx").val(),
+                "title" : $("#title").val(),
+                "writer" : $("#writer").val(),
+                "content" : CKEDITOR.instances.content.getData()
+            }),
+            success: function(result) {
+                console.log(result)
+                if (result.idx !== 0) {
+                    alert("글쓰기 수정 완료 !")
+
+                    // 성공했다면, /board/read로 이동
+                    window.location.href = '/board/read?idx=' + result.idx;
+                } else {
+                    alert("Error !!");
+
+                    // 실패했다면, /board/write에 남아있는채로 에러 메시지 띄우기
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error !");
+            }
+        })
+    }
+
+    $(document).ready(function() {
+        $("#btnSave").on("click", update);
+
+        CKEDITOR.replace("content", {
+            allowedContent : true,
+            removePlugins : 'iframe'
+        });
+
+        $("#content-view").click (function () {
+            var contents = CKEDITOR.instances.editor.getData();
+            console.log(contents);
+        });
     })
-}
-
-$(document).ready(function() {
-    $("#btnSave").on("click", update);
-
-    CKEDITOR.replace("content", {
-        allowedContent : true,
-        removePlugins : 'iframe'
-    });
-
-    $("#content-view").click (function () {
-        var contents = CKEDITOR.instances.editor.getData();
-        console.log(contents);
-    });
-})
 </script>
 {% endblock %}

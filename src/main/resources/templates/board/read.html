@@ -1,37 +1,62 @@
-{% extends "board/base" %}
+{% extends "board/base" %} <!-- Parent Template declared -->
 
 {% block content %}
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">게시글 읽기</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Board Read</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content container-fluid">
-
-        <div class="col-lg-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">글 제목 : {{ article.title | raw }}</h3>
+    <div class="content">
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">글 제목 : {{ article.title | raw }}</h3>
+                        </div>
+                        <div class="box-body" style="height: 700px">
+                            {% autoescape false %}
+                            글 내용 : {{ article.content | replace({ '<script>': "", '</script>' : "" }) }}
+                            {% endautoescape %}
+                        </div>
+                        <div class="user-block">
+                            <span class="username">
+                                    글 작성자 : {{ article.writer }}
+                                </span>
+                            <span class="description"></span>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-danger delBtn"><a href="/board/delete?idx={{ article.idx }}">삭제</a></button>
+                            <button type="submit" class="btn btn-primary"><a href="/board/update?idx={{ article.idx }}">수정</a></button>
+                        </div>
+                    </div>
+                    <!-- /.box -->
                 </div>
-                <div class="box-body" style="height: 700px">
-                    {% autoescape false %}
-                    글 내용 : {{ article.content | replace({ '<script>': "", '</script>' : "" }) }}
-                    {% endautoescape %}
-                </div>
-                <div class="user-block">
-                    <span class="username">
-                            글 작성자 : {{ article.writer }}
-                        </span>
-                    <span class="description"></span>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-danger delBtn"><a href="/board/delete?idx={{ article.idx }}">삭제</a></button>
-                    <button type="submit" class="btn btn-primary"><a href="/board/update?idx={{ article.idx }}">수정</a></button>
-                </div>
+                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col-lg-12 -->
-    </section>
+            <!-- /.row -->
+        </section>
+    </div>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

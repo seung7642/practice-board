@@ -1,58 +1,95 @@
 {% extends "board/base" %} <!-- Parent Template declared -->
 
 {% block content %}
-<div>
-    <form id="actionForm" method="GET" action="/board/list">
-        <input type="hidden" name="pageNum" value="{{ pageMaker.criteria.pageNum }}">
-        <input type="hidden" name="amount" value="{{ pageMaker.criteria.amount }}">
-    </form>
-
-    Total : {{ pageMaker.totalArticleCount }}
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">글번호</th>
-            <th scope="col">제목</th>
-            <th scope="col">내용</th>
-            <th scope="col">조회수</th>
-            <th scope="col">등록일</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for board in boardList %}
-        <tr>
-            <th scope="row">{{ loop.length - loop.index }}</th>
-            <td><a href="/board/read?idx={{ board.idx }}">{{ board.title }}</a></td>
-            <td>{% autoescape false %}
-                {% set content = board.content | split("<br") %}
-                {{ content[0] }}
-                {% endautoescape %}
-            </td>
-            <td>{{ board.hits }}</td>
-            <td>{{ board.regDate | date("yyyy-MM-dd HH:mm") }}</td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="4">데이터가 없습니다.</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <div class="pagination-list">
-        <<
-        <a href="/board/list?pageNum={{ pageMaker.firstPage }}">처음</a>
-        <a href="/board/list?pageNum={{ pageMaker.prevPage }}">이전</a>
-        {% for  i in range(pageMaker.startPage, pageMaker.endPage) %}
-        <span class="pagination-button">
-            <a href="/board/list?pageNum={{ i }}">{{ i }}</a>
-        </span>
-        {% endfor %}
-        <a href="/board/list?pageNum={{ pageMaker.nextPage }}">다음</a>
-        <a href="/board/list?pageNum={{ pageMaker.lastPage }}">마지막</a>
-        >>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">게시글 목록</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Board List</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form id="actionForm" method="GET" action="/board/list">
+                        <input type="hidden" name="pageNum" value="{{ pageMaker.criteria.pageNum }}">
+                        <input type="hidden" name="amount" value="{{ pageMaker.criteria.amount }}">
+                    </form>
+
+                    Total : {{ pageMaker.totalArticleCount }}
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">글번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">내용</th>
+                            <th scope="col">조회수</th>
+                            <th scope="col">등록일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for board in boardList %}
+                        <tr>
+                            <th scope="row">{{ loop.length - loop.index }}</th>
+                            <td><a href="/board/read?idx={{ board.idx }}">{{ board.title }}</a></td>
+                            <td>{% autoescape false %}
+                                {% set content = board.content | split("<br") %}
+                                {{ content[0] }}
+                                {% endautoescape %}
+                            </td>
+                            <td>{{ board.hits }}</td>
+                            <td>{{ board.regDate | date("yyyy-MM-dd HH:mm") }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4">데이터가 없습니다.</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="pagination-list">
+                        <<
+                        <a href="/board/list?pageNum={{ pageMaker.firstPage }}">처음</a>
+                        <a href="/board/list?pageNum={{ pageMaker.prevPage }}">이전</a>
+                        {% for  i in range(pageMaker.startPage, pageMaker.endPage) %}
+                        <span class="pagination-button">
+                            <a href="/board/list?pageNum={{ i }}">{{ i }}</a>
+                        </span>
+                        {% endfor %}
+                        <a href="/board/list?pageNum={{ pageMaker.nextPage }}">다음</a>
+                        <a href="/board/list?pageNum={{ pageMaker.lastPage }}">마지막</a>
+                        >>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
 </div>
+<!-- /.content-wrapper -->
 {% endblock %}
 
 {% block script %}
