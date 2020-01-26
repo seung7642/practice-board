@@ -11,7 +11,7 @@
             , upd_date
             , hits
         FROM
-            BOARD_TBL
+            practice_board.BOARD_TBL
         WHERE
             idx = #{idx}
     </select>
@@ -19,18 +19,18 @@
     <select id="getArticleList" resultType="Board" parameterType="Criteria">
         SET @rownum := 0;
         SELECT
-        idx
-        , title
-        , content
-        , writer
-        , reg_date
-        , upd_date
-        , hits
-        , @rownum := @rownum + 1 as rn
+              idx
+            , title
+            , content
+            , writer
+            , reg_date
+            , upd_date
+            , hits
+            , @rownum := @rownum + 1 as rn
         FROM
-        free_board2.BOARD_TBL
+            practice_board.BOARD_TBL
         ORDER BY
-        idx DESC
+            idx DESC
         LIMIT #{pageNum}, #{amount};
     </select>
 
@@ -38,7 +38,7 @@
         SELECT
             COUNT(idx)
         FROM
-            BOARD_TBL
+            practice_board.BOARD_TBL
     </select>
 
     <insert id="insertArticle" parameterType="Board" useGeneratedKeys="true" keyProperty="idx">
