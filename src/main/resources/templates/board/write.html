@@ -63,6 +63,8 @@
 
 {% block script %}
 <script>
+    $("li.nav-item > a.b").addClass("active");
+
     const regEx = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
     const maxSize = 1024 * 1024 * 5; // 5MB
 
