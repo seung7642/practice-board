@@ -11,6 +11,7 @@ public class Criteria {
 
     private int pageNum;
     private int amount;
+    private int startIndex;
 
     public Criteria() {
         this(1, 10); // 페이지 번호 1, 1개의 페이지당 게시글 수는 10개로 설정
@@ -19,5 +20,16 @@ public class Criteria {
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
+
+        startIndex = (pageNum - 1) * amount;
     }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
 }

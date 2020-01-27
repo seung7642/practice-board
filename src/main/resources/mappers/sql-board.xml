@@ -17,7 +17,6 @@
     </select>
 
     <select id="getArticleList" resultType="Board" parameterType="Criteria">
-        SET @rownum := 0;
         SELECT
               idx
             , title
@@ -26,12 +25,11 @@
             , reg_date
             , upd_date
             , hits
-            , @rownum := @rownum + 1 as rn
         FROM
             practice_board.BOARD_TBL
         ORDER BY
             idx DESC
-        LIMIT #{pageNum}, #{amount};
+        LIMIT #{startIndex}, #{amount};
     </select>
 
     <select id="getArticleCount" resultType="Integer">
