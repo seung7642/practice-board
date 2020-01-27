@@ -2,14 +2,20 @@ package com.practice.board.application.board.domain;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Alias("Board")
 @Data
 public class Board {
     private int idx;
+    @NotBlank
+    @Length(max = 1024)
     private String title;
+    @NotBlank
+    @Length(max = 1024 * 1024)
     private String content;
     private String writer;
     private Date regDate;
