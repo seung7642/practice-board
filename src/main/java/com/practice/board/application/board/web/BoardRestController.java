@@ -33,20 +33,10 @@ public class BoardRestController {
 
     // 유효성 검증에 실패하면 Spring Boot는 MethodArgumentNotValidException 예외를 던진다.
     @PostMapping(value = "/write")
-    public Map<String, Integer> write(@Valid @RequestBody Board board, BindingResult errors) {
+    public Map<String, Integer> write(@Valid @RequestBody Board board, BindingResult bindingResult) {
         log.info("JSON으로 넘어온 데이터 : {}", board.toString());
-
-        // IF @Valid를 통과하지 못했다면:
-        //     error 페이지로 리다이렉트 + 에러 메시지 전달
-        if (errors.hasErrors()) {
-            log.warn("유효성 검사 실패 !");
-
-            List<ObjectError> list = errors.getAllErrors();
-            for( ObjectError error : list )
-                log.warn("{}", error);
-        }
-
         Map<String, Integer> map = new HashMap<String, Integer>();
+
         try {
             map.put("idx", boardService.insertArticle(board));
         } catch (Exception e) {
@@ -66,11 +56,10 @@ public class BoardRestController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        log.error(ex.getMessage());
         Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult()
-                .getAllErrors()
-                .forEach((error) -> {
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
 

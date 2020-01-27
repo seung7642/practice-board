@@ -29,28 +29,34 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <form role="form" id="writeForm" method="post" action="">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="title">제목</label>
-                                <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+                <div class="card">
+                    <div class="card-body">
+                        <form role="form" id="writeForm" method="post" action="">
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="title">제목</label>
+                                        <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">내용</label>
+                                        <textarea class="form-control" id="content" name="content" rows="10"
+                                                  placeholder="내용을 입력해주세요"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="writer">작성자</label>
+                                        <input class="form-control" id="writer" name="writer">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="content">내용</label>
-                                <textarea class="form-control" id="content" name="content" rows="10"
-                                          placeholder="내용을 입력해주세요"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="writer">작성자</label>
-                                <input class="form-control" id="writer" name="writer">
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
-                <div class="box-footer">
-                    <button type="button" class="btn btn-success" id="btnSave">저장</button>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-success" id="btnSave">저장</button>
+                    </div>
                 </div>
+                <!-- /.card -->
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -133,6 +139,9 @@
                 , writer: $("#writer").val()
             }),
             success: function(resultData) {
+                // MethodArgumentNotValidException 예외로 리턴한 errors는 여기로 오나 ?
+                // if (resultData.errors === 1) window.location.href = '/commons/error_500;
+
                 alert("insert 데이터 정상 처리 !\nidx: " + resultData.idx);
                 window.location.href = '/board/read?idx=' + resultData.idx;
             },
