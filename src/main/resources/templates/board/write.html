@@ -133,15 +133,11 @@
                 , writer: $("#writer").val()
             }),
             success: function(resultData) {
-                if (resultData !== 0) {
-                    console.log("insert 데이터 정상 처리 !");
-                    alert("insert 데이터 정상 처리 !");
-                } else {
-                    alert("insert 실패 !");
-                }
+                alert("insert 데이터 정상 처리 !\nidx: " + resultData.idx);
+                window.location.href = '/board/read?idx=' + resultData.idx;
             },
-            error: function() {
-                alert("insert 에러 !");
+            error: function(request, error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
     }

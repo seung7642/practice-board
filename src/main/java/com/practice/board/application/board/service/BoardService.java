@@ -34,7 +34,7 @@ public interface BoardService {
      *
      * @param board
      */
-    void insertArticle(Board board) throws Exception;
+    int insertArticle(Board board) throws Exception;
 
     /**
      * 조회수를 +1 시킨다.

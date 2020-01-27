@@ -11,8 +11,12 @@
                 <h3><i class="fas fa-exclamation-triangle text-danger"></i> Oops! Something went wrong.</h3>
 
                 <p>
-                    We will work on fixing that right away.
-                    Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+                    {% if errors.hasFieldErrors() is true %}
+                        {% errors.getFieldErrors('name').defaultMessage %}
+                    {% else %}
+                        We will work on fixing that right away.
+                        Meanwhile, you may <a href="#">return to dashboard</a> or try using the search form.
+                    {% endif %}
                 </p>
 
                 <form class="search-form">

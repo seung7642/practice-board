@@ -11,10 +11,10 @@ import java.util.Date;
 @Data
 public class Board {
     private int idx;
-    @NotBlank
+    @NotBlank(message = "Title is mandatory !")
     @Length(max = 1024)
     private String title;
-    @NotBlank
+    @NotBlank(message = "Content is mandatory !")
     @Length(max = 1024 * 1024)
     private String content;
     private String writer;
@@ -28,5 +28,9 @@ public class Board {
 
     public Date getRegDate() {
         return regDate;
+    }
+
+    public int getIdx() {
+        return idx;
     }
 }

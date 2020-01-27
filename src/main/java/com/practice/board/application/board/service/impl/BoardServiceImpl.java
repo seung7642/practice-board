@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board getArticle(Integer idx) throws Exception {
-        return new Board();
+        return boardMapper.getArticle(idx);
     }
 
     @Override
@@ -36,9 +36,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void insertArticle(Board board) throws Exception {
+    public int insertArticle(Board board) throws Exception {
         board.setRegDate(new Date());  // 왜 setter 에러나지?
         boardMapper.insertArticle(board);
+        return board.getIdx();
     }
 
     @Override
