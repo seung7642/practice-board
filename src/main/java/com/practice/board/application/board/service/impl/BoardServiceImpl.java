@@ -7,13 +7,8 @@ import com.practice.board.application.board.domain.PageMaker;
 import com.practice.board.application.board.service.BoardService;
 import com.practice.board.commons.exception.NotValidException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -30,8 +25,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public PageMaker<Board> getArticleList(Pageable pageable) {
-        // 서비스단의 로직에서 매퍼에서 가져온 List<Board>를 PageImpl로 변환 -> PageImpl을 상속받아
-        // [이전] [다음] 탭을 위한 PageMaker를 만들기
         PageMaker<Board> pageMaker = new PageMaker<Board>(
                 boardMapper.getArticleList(new Criteria(pageable.getPageNumber(), pageable.getPageSize())),
                 pageable,
@@ -47,8 +40,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int insertArticle(Board board) throws NotValidException {
-        // TODO : Service단에서 파라미터로 넘어온 Board 객체에 대한 유효성 검증 처리 로직
-        // empty && length
+        // Service단에서 파라미터로 넘어온 Board 객체에 대한 유효성 검증 처리 로직
         if (!isValid(board)) throw new NotValidException();
 
         return boardMapper.insertArticle(board);
@@ -60,7 +52,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     private boolean isValid(Board board) {
-        if ("" == board.getTitle().trim()) {
+        if (board.getTitle().isEmpty() || board.getContent().isEmpty()) {
             return false;
         }
         return true;

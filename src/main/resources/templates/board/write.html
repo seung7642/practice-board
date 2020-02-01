@@ -126,8 +126,16 @@
         })
     }
 
+    function validateForm() {
+
+    }
+
     function insert() {
         // TODO: 게시글 데이터와 첨부 파일 데이터를 하나의 ajax로 같이 보낼 수 있나 ?
+        if (validateForm()) {
+            return;
+        }
+
         $.ajax({
             url: "/board/write",
             type: "post",
