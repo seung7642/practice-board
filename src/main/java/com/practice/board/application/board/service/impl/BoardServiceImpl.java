@@ -5,6 +5,7 @@ import com.practice.board.application.board.domain.Board;
 import com.practice.board.application.board.domain.Criteria;
 import com.practice.board.application.board.domain.PageMaker;
 import com.practice.board.application.board.service.BoardService;
+import com.practice.board.commons.exception.NotValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -45,14 +46,23 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int insertArticle(Board board) {
-        board.setRegDate(new Date());  // 왜 setter 에러나지?
-        boardMapper.insertArticle(board);
-        return board.getIdx();
+    public int insertArticle(Board board) throws NotValidException {
+        // TODO : Service단에서 파라미터로 넘어온 Board 객체에 대한 유효성 검증 처리 로직
+        // empty && length
+        if (!isValid(board)) throw new NotValidException();
+
+        return boardMapper.insertArticle(board);
     }
 
     @Override
     public void updateHits(Integer idx) {
         boardMapper.updateHits(idx);
+    }
+
+    private boolean isValid(Board board) {
+        if ("" == board.getTitle().trim()) {
+            return false;
+        }
+        return true;
     }
 }

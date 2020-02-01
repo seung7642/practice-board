@@ -1,6 +1,7 @@
 package com.practice.board.application.board.domain;
 
 import lombok.Data;
+import lombok.Getter;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Alias("Board")
-@Data
+@Data @Getter
 public class Board {
     private int idx;
     @NotBlank(message = "Title is mandatory !")
@@ -32,5 +33,13 @@ public class Board {
 
     public int getIdx() {
         return idx;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

@@ -2,6 +2,7 @@ package com.practice.board.application.board.web;
 
 import com.practice.board.application.board.domain.Board;
 import com.practice.board.application.board.service.BoardService;
+import com.practice.board.commons.exception.NotValidException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,16 +34,9 @@ public class BoardRestController {
 
     // 유효성 검증에 실패하면 Spring Boot는 MethodArgumentNotValidException 예외를 던진다.
     @PostMapping(value = "/write")
-    public Map<String, Integer> write(@Valid @RequestBody Board board, BindingResult bindingResult) {
+    public Board write(@Valid @RequestBody Board board, BindingResult bindingResult) {
         log.info("JSON으로 넘어온 데이터 : {}", board.toString());
-        Map<String, Integer> map = new HashMap<String, Integer>();
-
-        try {
-            map.put("idx", boardService.insertArticle(board));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return map; // REST Controller는 반환값이 json 타입이어야한다. 아니면 ajax에서 error로 드감
+        return boardService.getArticle(boardService.insertArticle(board));
     }
 
     @PostMapping(value = "/upload")
@@ -67,5 +61,13 @@ public class BoardRestController {
         });
 
         return errors;
+    }
+
+    // Service단에서 유효성 검증 실패가 발생하면 Spring 컨테이너쪽으로 익셉션을 던진다.
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotValidException.class)
+    public void handleNotValidExceptions(NotValidException ex) throws Exception {
+        log.error(ex.getMessage());
+        throw new Exception();
     }
 }

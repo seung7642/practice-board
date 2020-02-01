@@ -39,7 +39,7 @@ public interface BoardMapper {
      *
      * @param board
      */
-    void insertArticle(Board board);
+    int insertArticle(Board board);
 
     /**
      * 조회수를 +1 시킨다.
