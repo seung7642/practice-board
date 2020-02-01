@@ -34,7 +34,7 @@
 
     <select id="getArticleCount" resultType="Integer">
         SELECT
-            COUNT(idx)
+            COUNT(*)
         FROM
             practice_board.BOARD_TBL
     </select>

@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,19 +25,28 @@ public class BoardController {
     @Autowired
     public BoardController(BoardService boardService) { this.boardService = boardService; }
 
+//    @GetMapping(value = "/list")
+//    public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+//                           , @RequestParam(value = "amount", defaultValue = "10") int amount, ModelAndView mnv) {
+//        log.info("쿼리 스트링으로 넘어온 값 : [ {}, {} ]", pageNum, amount);
+//
+//        Criteria criteria = new Criteria(pageNum, amount);
+//        try {
+//            mnv.addObject("pageMaker", boardService.getPageMaker(criteria));
+//            mnv.addObject("boardList", boardService.getArticleList(criteria));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        mnv.setViewName("board/list");
+//        return mnv;
+//    }
+
     @GetMapping(value = "/list")
-    public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
-                           , @RequestParam(value = "amount", defaultValue = "10") int amount, ModelAndView mnv) {
-        log.info("쿼리 스트링으로 넘어온 값 : [ {}, {} ]", pageNum, amount);
+    public ModelAndView list(ModelAndView mnv, @PageableDefault(page = 1, size = 10) Pageable pageable) {
+        log.debug("요청으로 들어온 pageNumber = {}, pageSize = {}", pageable.getPageNumber(), pageable.getPageSize());
 
-        Criteria criteria = new Criteria(pageNum, amount);
-        try {
-            mnv.addObject("pageMaker", boardService.getPageMaker(criteria));
-            mnv.addObject("boardList", boardService.getArticleList(criteria));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        mnv.addObject("boardList", boardService.getArticleList(pageable));
         mnv.setViewName("board/list");
         return mnv;
     }
