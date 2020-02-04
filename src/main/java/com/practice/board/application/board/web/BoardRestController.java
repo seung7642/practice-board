@@ -62,12 +62,4 @@ public class BoardRestController {
 
         return errors;
     }
-
-    // Service단에서 유효성 검증 실패가 발생하면 Spring 컨테이너쪽으로 익셉션을 던진다.
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NotValidException.class)
-    public void handleNotValidExceptions(NotValidException ex) throws Exception {
-        log.error(ex.getMessage());
-        throw new Exception();
-    }
 }

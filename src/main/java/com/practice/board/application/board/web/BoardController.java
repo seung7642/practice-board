@@ -4,12 +4,14 @@ import com.mysql.cj.log.LogFactory;
 import com.practice.board.application.board.domain.Board;
 import com.practice.board.application.board.domain.Criteria;
 import com.practice.board.application.board.service.BoardService;
+import com.practice.board.commons.exception.NotValidException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,5 +72,13 @@ public class BoardController {
 
         mnv.setViewName("board/read");
         return mnv;
+    }
+
+    // Service단에서 유효성 검증 실패가 발생하면 Spring 컨테이너쪽으로 익셉션을 던진다.
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotValidException.class)
+    public void handleNotValidExceptions(NotValidException ex) throws Exception {
+        log.error(ex.getMessage());
+        throw new Exception();
     }
 }

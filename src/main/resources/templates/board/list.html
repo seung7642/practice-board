@@ -54,11 +54,20 @@
                                 <tbody>
                                 {% for board in boardList.content %}
                                 <tr>
-                                    <th scope="row">{{ loop.length - loop.index }}</th>
-                                    <td><a href="/board/read?idx={{ board.idx }}">{{ board.title }}</a></td>
+                                    <th scope="row">{{ boardList.totalArticleCount - (loop.index + boardList.number * boardList.size) }}</th>
+                                    <td><a href="/board/read?idx={{ board.idx }}">
+                                        {% if board.title.length > 10  %}
+                                            {{ board.title | slice(0, 10) }}
+                                        {% else %}
+                                            {{ board.title }}
+                                        {% endif %}</a></td>
                                     <td>{% autoescape false %}
                                         {% set content = board.content | split("<br") %}
-                                        {{ content[0] }}
+                                        {% if content[0].length > 10 %}
+                                            {{ content[0] | slice(0, 10) }}
+                                        {% else %}
+                                            {{ content[0] }}
+                                        {% endif %}
                                         {% endautoescape %}
                                     </td>
                                     <td>{{ board.hits }}</td>
