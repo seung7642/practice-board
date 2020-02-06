@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에 등록된 클래스와 매핑시킨다. 해당 클래스에선 해당 설정의 값들을 사용할 수 있게됨. -->
+<mapper namespace="com.practice.board.application.board.dao.BoardAttachMapper">
+
+    <insert id="insert">
+        INSERT INTO BOARD_TBL (
+              title
+            , content
+            , writer
+            , reg_date
+        ) VALUES (
+              #{title}
+            , #{content}
+            , #{writer}
+            , NOW()
+        )
+    </insert>
+
+</mapper>
