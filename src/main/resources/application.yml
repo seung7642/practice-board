@@ -24,3 +24,9 @@ spring:
       jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
       username: pangtrue
       password: pangtrue1234!@#$
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      location: /Users/seung7642/neowiz-data/board
+      max-request-size: 40MB
+      file-size-threshold: 20971520
