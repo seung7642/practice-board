@@ -47,6 +47,14 @@
                                         <label for="writer">작성자</label>
                                         <input class="form-control" id="writer" name="writer">
                                     </div>
+                                    <div class="form-group uploadDiv">
+                                        <input type="file" name="uploadFile" id="file" multiple>
+                                    </div>
+                                    <div class="uploadResult">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -94,40 +102,32 @@
         return true;
     }
 
-    /**
-     * 파일 업로드용 ajax 요청을 담은 함수.
-     *
-     * @returns {boolean}
-     */
-    function uploadFile() {
-        const formData = new FormData(); // Javascript의 Built-in 객체인 FormData 객체
-        const inputFile = $("input[name='uploadFile']");
-        const files = inputFile[0].files;
-        console.log(files);
+    function showUploadResult(uploadResultArr) {
+        if (!uploadResultArr || uploadResultArr.length == 0) return;
 
-        for (let i = 0; i < files.length; ++i) {
-            if (!checkExtension(files[i].name, files[i].size)) return false;
+        var uploadUL = $(".uploadResult ul");
+        var str = "";
 
-            formData.append("uploadFile", files[i]);
-        }
-
-        $.ajax({
-            url: '/board/uploadFile',
-            type: "post",
-            processData: false,
-            contentType: false,
-            data: formData,
-            success: function(resultData) {
-                alert("Uploaded Success !");
-            },
-            error: function() {
-                alert("Upload Failed !");
+        $(uploadResultArr).each(function(i, obj) {
+            if (obj.image) { // 이미지 파일인 경우
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+                str += "<li><div>";
+                str += "<span>" + obj.fileName + "</span>";
+                str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+                str += "<img src='/display?filename=" + fileCallPath + "'>";
+                str += "</div></li>";
+            } else { // 이미지 파일이 아닌 경우
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+                var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+                str += "<li><div>";
+                str += "<span>" + obj.fileName + "</span>";
+                str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+                str += "<img src='/images/attach.png'>";
+                str += "</div></li>";
             }
-        })
-    }
+        });
 
-    function validateForm() {
-
+        uploadUL.append(str);
     }
 
     function insert() {
@@ -162,6 +162,35 @@
     $(document).ready(function() {
 
         $("#btnSave").on("click", insert);
+
+        $("input[type='file']").change(function(e) {
+            var formData = new FormData();
+            var inputFile = $("input[name='uploadFile']");
+            var files = inputFile[0].files;
+
+            // formData에 첨부파일 데이터를 추가한다.
+            for (var i = 0; i < files.length; ++i) {
+                if (!checkExtension(files[i].name, files[i].size)) return false;
+                formData.append("uploadFile", files[i]);
+            }
+
+            $.ajax({
+                url: '/board/upload',
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(result) {
+                    console.log(result);
+                    alert("Uploaded Success !");
+                    showUploadResult(result);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    alert("code : " + jqXHR.status + "\nerror message : " + jqXHR.responseText);
+                }
+            })
+        });
     })
 </script>
 {% endblock %}
