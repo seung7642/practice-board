@@ -1,14 +1,15 @@
 package com.practice.board.commons.utils;
 
+import com.practice.board.application.board.domain.AttachFile;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatchNotFoundException;
 import net.sf.jmimemagic.MagicParseException;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,39 +30,41 @@ import java.util.UUID;
 @Slf4j
 public class UploadFileUtils {
 
-    private static final String UPLOAD_DIRECTORY = "/neowiz-data/board"; // TODO: 앞에 root context 경로를 추가해줘야함
+    private static final String UPLOAD_DIRECTORY = "/neowiz-data/board";
 
     // 파일 업로드 처리
-    public static String uploadFile(MultipartFile multipartFile) throws Exception {
+    public static AttachFile uploadFile(MultipartFile multipartFile, HttpServletRequest request) throws Exception {
+        AttachFile attachFile = new AttachFile();
 
         String originalFileName = multipartFile.getOriginalFilename(); // 파일명
-        byte[] fileData = multipartFile.getBytes();  // 파일 데이터
 
         // 1. 파일명 중복 방지 처리
-        String uuidFileName = getUuidFileName(originalFileName);
+        String uuid = getUuid();
+        String uuidFileName = getUuidFileName(uuid, originalFileName);
 
         // 2. 파일 업로드 경로 설정
-        String rootPath = getRootPath(originalFileName); // 기본경로 추출(이미지 or 일반파일)
-        String datePath = getDatePath(rootPath); // 날짜 경로 추출, 날짜 폴더 생성
+        String rootPath = getRootPath(originalFileName, request); // 실제 저장될 ROOT PATH
+        String datePath = getDatePath(rootPath); // 날짜 경로 추출 및 디렉터리 생성
 
         // 3. 서버에 파일 저장
         File target = new File(rootPath + datePath, uuidFileName); // 파일 객체 생성
-        FileCopyUtils.copy(fileData, target); // 파일 객체에 파일 데이터 복사
+        multipartFile.transferTo(target);
 
         // 4. 이미지 파일인 경우 썸네일이미지 생성
         if (checkImageType(target)) {
             createThumbnail(multipartFile, rootPath + datePath, uuidFileName);
+            attachFile.setImage(true);
         }
 
-        // 5. 파일 저장 경로 치환
-        return replaceSavedFilePath(datePath, uuidFileName);
+        attachFile.setUploadPath(rootPath + datePath);
+        attachFile.setFileName(originalFileName);
+        attachFile.setUuid(uuid);
+        return attachFile;
     }
 
     // 기본 경로 추출
-    public static String getRootPath(String fileName) {
-        // TODO : root context path 구하기
-
-        return "";
+    public static String getRootPath(String fileName, HttpServletRequest request) {
+        return request.getSession().getServletContext().getRealPath(UPLOAD_DIRECTORY);
     }
 
     /**
@@ -71,12 +74,12 @@ public class UploadFileUtils {
      * @param
      * @return String
      */
-    private static String getDatePath() {
+    private static String getDatePath(String rootPath) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = simpleDateFormat.format(date);
         str = str.replace("-", File.separator);
-        createDateDirectory(str);
+        createDateDirectory(rootPath, str);
         return str;
     }
 
@@ -86,7 +89,7 @@ public class UploadFileUtils {
      * @param datePath
      * @return
      */
-    private static void createDateDirectory(String datePath) {
+    private static void createDateDirectory(String rootPath, String datePath) {
         log.info("업로드할 년/월/일 디렉터리 경로: {}" + datePath);
         File uploadPath = new File(UPLOAD_DIRECTORY, datePath);
         if (!uploadPath.exists()) uploadPath.mkdirs();
@@ -111,8 +114,12 @@ public class UploadFileUtils {
         return thumbFileName;
     }
 
-    private static String getUuidFileName(String originalFileName) {
-        return UUID.randomUUID().toString() + "_" + originalFileName;
+    private static String getUuidFileName(String uuid, String originalFileName) {
+        return uuid + "_" + originalFileName;
+    }
+
+    private static String getUuid() {
+        return UUID.randomUUID().toString();
     }
 
     /**
@@ -147,3 +154,4 @@ public class UploadFileUtils {
         return "";
     }
 }
+
