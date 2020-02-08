@@ -43,6 +43,7 @@ public class UploadFileUtils {
         String uuid = getUuid();
         String uuidFileName = getUuidFileName(uuid, originalFileName);
 
+        // TODO : 파일 저장 경로를 /resources/static/board/2020/02/08 처럼 하려면?
         // 2. 파일 업로드 경로 설정
         String rootPath = getRootPath(originalFileName, request); // 기본경로 추출
         String datePath = getDatePath(rootPath); // 날짜 경로 추출 && 날짜 폴더 생성

@@ -48,7 +48,7 @@
                                         <input class="form-control" id="writer" name="writer">
                                     </div>
                                     <div class="form-group uploadDiv">
-                                        <input type="file" name="uploadFile" id="file" multiple>
+                                        <input type="file" name="uploadFile" id="file">
                                     </div>
                                     <div class="uploadResult">
                                         <ul>
@@ -76,120 +76,16 @@
 {% endblock %}
 
 {% block script %}
+<script src="/dist/js/article_file_upload.js"></script>
+<script src="/dist/js/article.js"></script>
 <script>
     $("li.nav-item > a.b").addClass("active");
 
-    const regEx = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-    const maxSize = 1024 * 1024 * 5; // 5MB
-
-    /**
-     * 업로드하는 파일의 확장자와 사이즈를 체크하는 함수.
-     *
-     * @param fileName
-     * @param fileSize
-     */
-    function checkExtension(fileName, fileSize) {
-        if (fileSize >= maxSize) {
-            alert("파일 사이즈 초과");
-            return false;
-        }
-
-        if (regEx.test(fileName)) {
-            alert("해당 종류의 파일은 업로드할 수 없습니다.");
-            return false;
-        }
-
-        return true;
-    }
-
-    function showUploadResult(uploadResultArr) {
-        if (!uploadResultArr || uploadResultArr.length == 0) return;
-
-        var uploadUL = $(".uploadResult ul");
-        var str = "";
-
-        $(uploadResultArr).each(function(i, obj) {
-            if (obj.image) { // 이미지 파일인 경우
-                var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-                str += "<li><div>";
-                str += "<span>" + obj.fileName + "</span>";
-                str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-                str += "<img src='/display?filename=" + fileCallPath + "'>";
-                str += "</div></li>";
-            } else { // 이미지 파일이 아닌 경우
-                var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
-                var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
-                str += "<li><div>";
-                str += "<span>" + obj.fileName + "</span>";
-                str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-                str += "<img src='/images/attach.png'>";
-                str += "</div></li>";
-            }
-        });
-
-        uploadUL.append(str);
-    }
-
-    function insert() {
-        // TODO: 게시글 데이터와 첨부 파일 데이터를 하나의 ajax로 같이 보낼 수 있나 ?
-        if (validateForm()) {
-            return;
-        }
-
-        $.ajax({
-            url: "/board/write",
-            type: "post",
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-                title: $("#title").val()
-                , content: $("#content").val()
-                , writer: $("#writer").val()
-            }),
-            success: function(resultData) {
-                // MethodArgumentNotValidException 예외로 리턴한 errors는 여기로 오나 ?
-                // if (resultData.errors === 1) window.location.href = '/commons/error_500;
-
-                alert("insert 데이터 정상 처리 !\nidx: " + resultData.idx);
-                window.location.href = '/board/read?idx=' + resultData.idx;
-            },
-            error: function(request, error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-        });
-    }
-
     $(document).ready(function() {
-
         $("#btnSave").on("click", insert);
 
         $("input[type='file']").change(function(e) {
-            var formData = new FormData();
-            var inputFile = $("input[name='uploadFile']");
-            var files = inputFile[0].files;
-
-            // formData에 첨부파일 데이터를 추가한다.
-            for (var i = 0; i < files.length; ++i) {
-                if (!checkExtension(files[i].name, files[i].size)) return false;
-                formData.append("uploadFile", files[i]);
-            }
-
-            $.ajax({
-                url: '/board/upload',
-                type: "POST",
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function(result) {
-                    console.log(result);
-                    alert("Uploaded Success !");
-                    showUploadResult(result);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    alert("code : " + jqXHR.status + "\nerror message : " + jqXHR.responseText);
-                }
-            })
+            upload(getFormData());
         });
     })
 </script>
