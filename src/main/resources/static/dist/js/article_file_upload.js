@@ -27,30 +27,28 @@ function upload(formData) {
  *
  * @param uploadResultArr
  */
-function showUploadResult(uploadResultArray) {
-    if (!uploadResultArray || uploadResultArray.length == 0) return;
+function showUploadResult(uploadResult) {
+    if (!uploadResult) return;
 
     var uploadUL = $(".uploadResult ul");
     var str = "";
 
-    $(uploadResultArray).each(function(i, obj) {
-        if (obj.image) { // 이미지 파일인 경우
-            var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-            str += "<li><div>";
-            str += "<span>" + obj.fileName + "</span>";
-            str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-            str += "<img src='/board/display?filename=" + fileCallPath + "'>";
-            str += "</div></li>";
-        } else { // 이미지 파일이 아닌 경우
-            var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
-            var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
-            str += "<li><div>";
-            str += "<span>" + obj.fileName + "</span>";
-            str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-            str += "<img src='/images/attach.png'>";
-            str += "</div></li>";
-        }
-    });
+    if (uploadResult.image) { // 이미지 파일인 경우
+        var fileCallPath = encodeURIComponent(uploadResult.uploadPath + "/s_" + uploadResult.uuid + "_" + uploadResult.fileName);
+        str += "<li><div>";
+        str += "<span>" + uploadResult.fileName + "</span>";
+        str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+        str += "<img src='/board/display?filename=" + fileCallPath + "'>";
+        str += "</div></li>";
+    } else { // 이미지 파일이 아닌 경우
+        var fileCallPath = encodeURIComponent(uploadResult.uploadPath + "/" + uploadResult.uuid + "_" + uploadResult.fileName);
+        var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+        str += "<li><div>";
+        str += "<span>" + uploadResult.fileName + "</span>";
+        str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+        str += "<img src='/images/attach.png'>";
+        str += "</div></li>";
+    }
 
     uploadUL.append(str);
 }
