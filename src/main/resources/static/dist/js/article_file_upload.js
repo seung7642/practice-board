@@ -13,6 +13,7 @@ function upload(formData) {
         data: formData,
         success: function(result) {
             alert("파일 업로드 성공 !");
+            console.log(result);
             showUploadResult(result);
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -32,7 +33,7 @@ function showUploadResult(uploadResultArray) {
     var uploadUL = $(".uploadResult ul");
     var str = "";
 
-    $(uploadResultArr).each(function(i, obj) {
+    $(uploadResultArray).each(function(i, obj) {
         if (obj.image) { // 이미지 파일인 경우
             var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
             str += "<li><div>";

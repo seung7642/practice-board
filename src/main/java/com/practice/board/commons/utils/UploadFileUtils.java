@@ -70,7 +70,7 @@ public class UploadFileUtils {
      * @param
      * @return String
      */
-    private static String getDatePath() {
+    public static String getDatePath() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = simpleDateFormat.format(date);
@@ -142,11 +142,31 @@ public class UploadFileUtils {
     /**
      * 파일의 MIME 타입을 가져온다.
      *
-     * @param file
+     * @param file File
      * @return String
      */
     public static String getMimeType(File file) {
         try {
+            return Magic.getMagicMatch(file, false).getMimeType();
+        } catch (MagicParseException e) {
+//            log.debug(e.getMessage(), e);
+        } catch (MagicMatchNotFoundException e) {
+//            log.debug(e.getMessage(), e);
+        } catch (MagicException e) {
+//            log.debug(e.getMessage(), e);
+        }
+        return "";
+    }
+
+    /**
+     * 파일의 MIME 타입을 가져온다.
+     *
+     * @param fileName String
+     * @return String
+     */
+    public static String getMimeType(String fileName) {
+        try {
+            File file = new File(UPLOAD_PATH + getDatePath(), fileName);
             return Magic.getMagicMatch(file, false).getMimeType();
         } catch (MagicParseException e) {
 //            log.debug(e.getMessage(), e);

@@ -47,7 +47,7 @@ public class UploadRestController {
 
     @GetMapping("/display")
     public ResponseEntity<byte[]> getFile(String fileName) {
-        File file = new File(UPLOAD_DIR + fileName);
+        File file = new File(UPLOAD_DIR + UploadFileUtils.getDatePath(), fileName);
         ResponseEntity<byte[]> result = null;
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", UploadFileUtils.getMimeType(file));
