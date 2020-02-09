@@ -31,14 +31,14 @@ import java.util.UUID;
 @RequestMapping(value = "/board")
 public class UploadRestController {
 
-    private static final String UPLOAD_DIR = "/Users/seung7642/neowiz-data/board";
+    private static final String UPLOAD_DIR = "C:\\practice-board\\";
 
     // 파일 업로드를 위해 ajax 요청을 하면 해당 컨트롤러로 들어온다.
     @PostMapping(value = "/upload")
-    public ResponseEntity<AttachFile> upload(MultipartFile uploadFile, HttpServletRequest request) {
+    public ResponseEntity<AttachFile> upload(MultipartFile uploadFile) {
         ResponseEntity<AttachFile> entity = null;
         try {
-            entity = new ResponseEntity<>(UploadFileUtils.uploadFile(uploadFile, request), HttpStatus.CREATED);
+            entity = new ResponseEntity<>(UploadFileUtils.uploadFile(uploadFile), HttpStatus.CREATED);
         } catch (Exception e) {
             entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -47,19 +47,16 @@ public class UploadRestController {
 
     @GetMapping("/display")
     public ResponseEntity<byte[]> getFile(String fileName) {
-//        log.info("fileName : {}", fileName);
-
         File file = new File(UPLOAD_DIR + fileName);
         ResponseEntity<byte[]> result = null;
         HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-Type", getMimeType(file));
+        headers.add("Content-Type", UploadFileUtils.getMimeType(file));
 
         try {
             result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
         } catch (IOException e) {
-//            log.debug(e.getMessage(), e);
+            result = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         return result;
     }
 }

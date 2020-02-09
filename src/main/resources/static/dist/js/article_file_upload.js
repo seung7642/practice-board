@@ -9,6 +9,7 @@ function upload(formData) {
         type: "POST",
         processData: false,
         contentType: false,
+        dataType: "json",
         data: formData,
         success: function(result) {
             alert("파일 업로드 성공 !");
