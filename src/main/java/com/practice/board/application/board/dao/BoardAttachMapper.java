@@ -31,5 +31,5 @@ public interface BoardAttachMapper {
      * @param boardIdx
      * @return List<BoardAttach>
      */
-    List<BoardAttach> findByIdx(Long boardIdx);
+    List<BoardAttach> findByIdx(int boardIdx);
 }
