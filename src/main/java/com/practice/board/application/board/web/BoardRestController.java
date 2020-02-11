@@ -39,14 +39,6 @@ public class BoardRestController {
         return boardService.getArticle(boardService.insertArticle(board));
     }
 
-    @PostMapping(value = "/upload")
-    public String upload(@RequestBody MultipartFile multipartFile) {
-
-        // TODO : 파일 업로드를 위한 Service단의 메서드
-
-        return "";
-    }
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
