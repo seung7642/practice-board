@@ -26,10 +26,15 @@
             , upd_date
             , hits
         FROM
-            practice_board.BOARD_TBL
-        ORDER BY
-            idx DESC
-        LIMIT #{startIndex}, #{amount};
+            practice_board.BOARD_TBL as outside
+        JOIN (
+            SELECT idx
+            FROM practice_board.BOARD_TBL
+            WHERE reg_date > '1970-01-01'
+            ORDER BY idx DESC
+            LIMIT #{startRowNumber}, 10
+        ) as sub
+        ON outside.idx = sub.idx
     </select>
 
     <select id="getArticleCount" resultType="Integer">
