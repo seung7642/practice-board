@@ -2,6 +2,7 @@
  * 파일 업로드를 위한 Ajax 요청을 보낸다.
  *
  * @param formData
+ * @return
  */
 function upload(formData) {
     $.ajax({
@@ -26,6 +27,7 @@ function upload(formData) {
  * 파일 업로드를 위한 Ajax 요청 성공 후에 업로드 결과를 보여준다.
  *
  * @param uploadResultArr
+ * @return
  */
 function showUploadResult(uploadResult) {
     if (!uploadResult) return;
@@ -34,18 +36,23 @@ function showUploadResult(uploadResult) {
     var str = "";
 
     if (uploadResult.image) { // 이미지 파일인 경우
-        var fileCallPath = encodeURIComponent(uploadResult.uploadPath + "/s_" + uploadResult.uuid + "_" + uploadResult.fileName);
-        str += "<li><div>";
+        var encodeFileCallPath = encodeURIComponent(uploadResult.uploadPath + "/s_" + uploadResult.uuid + "_" + uploadResult.fileName);
+        var fileCallPath = uploadResult.uploadPath + "/s_" + uploadResult.uuid + "_" + uploadResult.fileName;
+        str += "<li data-path='" + uploadResult.uploadPath + "' data-uuid='" + uploadResult.uuid +"'" +
+            " data-filename='" + uploadResult.fileName + "' data-type='" + uploadResult.image + "'><div>";
         str += "<span>" + uploadResult.fileName + "</span>";
-        str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+        str += "<button type='button' class='btn btn-warning btn-circle' data-file=\'" + fileCallPath + "\' data-type='image'> " +
+            "<i class='fa fa-times'></i></button><br>";
         str += "<img src='/board/display?filename=" + fileCallPath + "'>";
         str += "</div></li>";
     } else { // 이미지 파일이 아닌 경우
         var fileCallPath = encodeURIComponent(uploadResult.uploadPath + "/" + uploadResult.uuid + "_" + uploadResult.fileName);
         var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
-        str += "<li><div>";
+        str += "<li data-path='" + uploadResult.uploadPath + "' data-uuid='" + uploadResult.uuid +"'" +
+            " data-filename='" + uploadResult.fileName + "' data-type='" + uploadResult.image + "'><div>";
         str += "<span>" + uploadResult.fileName + "</span>";
-        str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+        str += "<button type='button' class='btn btn-warning btn-circle' data-file=\'" + fileCallPath + "\' data-type='file'>" +
+            "<i class='fa fa-times'></i></button><br>";
         str += "<img src='/images/attach.png'>";
         str += "</div></li>";
     }
@@ -58,6 +65,7 @@ function showUploadResult(uploadResult) {
  *
  * @param fileName
  * @param fileSize
+ * @return boolean
  */
 function checkExtension(fileName, fileSize) {
     var regEx = new RegExp("(.*?)\.(exe|sh|zip|alz)$");

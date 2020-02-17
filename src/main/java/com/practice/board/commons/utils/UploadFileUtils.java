@@ -10,7 +10,6 @@ import net.sf.jmimemagic.MagicParseException;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,7 +19,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * User: SeungHo Lee (seung7642@neowiz.com)
+ * User: SeungHo Lee (seung7642@gmail.com)
  * Date: 2020. 2. 7.
  * Time: 오후 5:23
  *
@@ -32,7 +31,7 @@ import java.util.UUID;
 @Slf4j
 public class UploadFileUtils {
 
-    private static final String UPLOAD_PATH = "C:\\practice-board\\";
+    private static final String UPLOAD_PATH = "/Users/seung7642/neowiz-data/board";
 
     public static AttachFile uploadFile(MultipartFile multipartFile) throws Exception {
         AttachFile attachFile = new AttachFile();
@@ -63,6 +62,11 @@ public class UploadFileUtils {
         return attachFile;
     }
 
+    public static byte[] displayFile(String fileName) throws IOException {
+        File file = new File(UPLOAD_PATH + "/" + fileName);
+        return FileCopyUtils.copyToByteArray(file);
+    }
+
     /**
      * 한 디렉터리에 너무 많은 파일이 업로드되는 문제를 방지하기 위하여, 년/월/일에 해당하는 하위 디렉터리를 생성하기 위해
      * 오늘 날짜를 기준으로 년/월/일 값을 구한다. ex) 2020 02 08
@@ -84,7 +88,9 @@ public class UploadFileUtils {
      * @return
      */
     private static void createDatePath(File uploadPath) {
-        if (!uploadPath.exists()) uploadPath.mkdirs();
+        if (!uploadPath.exists()) {
+            uploadPath.mkdirs();
+        }
     }
 
     /**
@@ -100,7 +106,7 @@ public class UploadFileUtils {
         try (FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, thumbFileName))) {
             Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
         } catch (IOException e) {
-//            log.debug(e.getMessage(), e);
+            log.debug(e.getMessage(), e);
         }
 
         return thumbFileName;
@@ -149,11 +155,11 @@ public class UploadFileUtils {
         try {
             return Magic.getMagicMatch(file, false).getMimeType();
         } catch (MagicParseException e) {
-//            log.debug(e.getMessage(), e);
+            log.debug(e.getMessage(), e);
         } catch (MagicMatchNotFoundException e) {
-//            log.debug(e.getMessage(), e);
+            log.debug(e.getMessage(), e);
         } catch (MagicException e) {
-//            log.debug(e.getMessage(), e);
+            log.debug(e.getMessage(), e);
         }
         return "";
     }
@@ -165,16 +171,7 @@ public class UploadFileUtils {
      * @return String
      */
     public static String getMimeType(String fileName) {
-        try {
-            File file = new File(UPLOAD_PATH + getDatePath(), fileName);
-            return Magic.getMagicMatch(file, false).getMimeType();
-        } catch (MagicParseException e) {
-//            log.debug(e.getMessage(), e);
-        } catch (MagicMatchNotFoundException e) {
-//            log.debug(e.getMessage(), e);
-        } catch (MagicException e) {
-//            log.debug(e.getMessage(), e);
-        }
-        return "";
+        return getMimeType(new File(UPLOAD_PATH + "/" + fileName));
     }
 }
+
