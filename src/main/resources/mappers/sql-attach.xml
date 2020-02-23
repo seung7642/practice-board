@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace에 등록된 클래스와 매핑시킨다. 해당 클래스에선 해당 설정의 값들을 사용할 수 있게됨. -->
-<mapper namespace="com.pangtrue.practice.board.application.dao.BoardAttachMapper">
+<mapper namespace="com.pangtrue.practice.application.board.dao.BoardAttachMapper">
 
     <insert id="insert" parameterType="BoardAttach">
         INSERT INTO BOARD_ATTACH_TBL (

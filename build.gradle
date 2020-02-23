@@ -29,6 +29,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '5.7.19'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
-	compile (group: 'net.coobird', name: 'thumbnailator', version: '0.4.1')
-	compile (group: 'net.sf.jmimemagic', name: 'jmimemagic', version: '0.1.5')
+	compile(group: 'net.coobird', name: 'thumbnailator', version: '0.4.1')
+	compile(group: 'net.sf.jmimemagic', name: 'jmimemagic', version: '0.1.5')
 }
