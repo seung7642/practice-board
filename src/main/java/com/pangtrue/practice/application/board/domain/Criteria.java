@@ -23,13 +23,4 @@ public class Criteria {
 
         startRowNumber = (pageNum - 1) * amount;
     }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
 }

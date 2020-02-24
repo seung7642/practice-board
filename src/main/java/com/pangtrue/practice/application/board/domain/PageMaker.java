@@ -1,6 +1,7 @@
 package com.pangtrue.practice.application.board.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
