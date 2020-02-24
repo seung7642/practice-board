@@ -21,7 +21,6 @@ import java.util.Map;
 @RequestMapping(value = "/board")
 public class BoardRestController {
 
-    private static final Logger log = LoggerFactory.getLogger(BoardRestController.class);
     private final BoardService boardService;
 
     @Autowired
