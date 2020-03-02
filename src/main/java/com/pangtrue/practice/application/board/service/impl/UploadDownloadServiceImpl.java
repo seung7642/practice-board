@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * User: SeungHo Lee (seung7642@neowiz.com)
+ * User: SeungHo Lee (seung7642@gmail.com)
  * Date: 2020. 2. 11.
  * Time: 오전 9:50
  */

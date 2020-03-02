@@ -3,8 +3,11 @@ package com.pangtrue.practice.application.board.domain;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
-// 페이징 처리를 위해서는 페이지 번호와 1페이지당 몇 개의 게시글을 보여줄건지 설정이 필요하다.
-// 이것을 위한 도메인 객체. Criteria는 '검색의 기준'이라는 의미.
+/**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 1. 10.
+ * Time: 오후 8:18
+ */
 @Alias("Criteria")
 @Data
 public class Criteria {
