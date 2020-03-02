@@ -36,7 +36,7 @@ public class DatabaseConfiguration {
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mappers/mybatis-config.xml"));  // 설정 파일 경로 설정
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/sql-*.xml")); // sql 접두사를 생략하면 부트는 mybatis-config.xml 설정 파일도 읽어버린다.
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.practice"); // 해당 패키지 하위에서 @Alias 어노테이션을 찾아서 등록한다.
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.pangtrue.practice"); // 해당 패키지 하위에서 @Alias 어노테이션을 찾아서 등록한다.
         return sqlSessionFactoryBean.getObject();
     }
 

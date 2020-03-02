@@ -1,7 +1,6 @@
 package com.pangtrue.practice.application.board.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +10,9 @@ import java.util.List;
  *  페이지 목록을 처리하기 위한 클래스.
  *  페이지 목록 형식 : << 처음 이전 1 2 3 4 5 6 7 8 9 10 다음 마지막 >>
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class PageMaker<T> extends PageImpl<T> {
 
     private static final int DISPLAY_PAGE_NUM = 5;  // << 1, 2, 3, 4, 5 >>  페이지 목록에 몇 개씩 표시할건지 나타낼 변수
