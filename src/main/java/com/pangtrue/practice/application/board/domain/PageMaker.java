@@ -7,6 +7,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 1. 10.
+ * Time: 오후 8:18
+ */
+/**
  *  페이지 목록을 처리하기 위한 클래스.
  *  페이지 목록 형식 : << 처음 이전 1 2 3 4 5 6 7 8 9 10 다음 마지막 >>
  */

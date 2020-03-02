@@ -8,6 +8,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+/**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 1. 10.
+ * Time: 오후 8:18
+ */
 @Alias("Board")
 @Data
 public class Board {

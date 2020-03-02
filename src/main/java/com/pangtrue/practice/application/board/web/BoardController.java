@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 1. 10.
+ * Time: 오후 8:18
+ */
 @Slf4j
 @Controller
 @RequestMapping(value = "/board")
