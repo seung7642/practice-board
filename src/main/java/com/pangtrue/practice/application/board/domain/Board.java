@@ -1,7 +1,6 @@
 package com.pangtrue.practice.application.board.domain;
 
 import lombok.Data;
-import lombok.Getter;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 

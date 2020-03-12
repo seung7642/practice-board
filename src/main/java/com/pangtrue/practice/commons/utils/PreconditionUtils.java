@@ -11,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PreconditionUtils {
 
-    public static void invalidCondition(boolean flag, String message) throws NotValidException {
-        if (flag) log.debug(message);
-
-        throw new NotValidException();
+    public static void invalidCondition(boolean expression, String message) throws NotValidException {
+        if (Boolean.TRUE.equals(expression)) {
+            throw new NotValidException();
+        }
     }
 }
