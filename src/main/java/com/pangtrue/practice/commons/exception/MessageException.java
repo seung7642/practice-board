@@ -34,4 +34,11 @@ public class MessageException extends RuntimeException {
         returnTp.setMessage(errorMessage);
         this.returnTp = returnTp;
     }
+
+    public MessageException(RETURN_TP returnTp, String errorMessage, Throwable throwable) {
+        super(returnTp.getMessage(), throwable);
+
+        returnTp.setMessage(errorMessage);
+        this.returnTp = returnTp;
+    }
 }
