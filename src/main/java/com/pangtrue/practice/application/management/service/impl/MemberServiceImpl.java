@@ -1,6 +1,6 @@
 package com.pangtrue.practice.application.management.service.impl;
 
-import com.pangtrue.practice.application.management.dao.MemberDao;
+import com.pangtrue.practice.application.management.dao.MemberMapper;
 import com.pangtrue.practice.application.management.domain.Member;
 import com.pangtrue.practice.application.management.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +17,14 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberDao memberDao;
+    private final MemberMapper memberMapper;
 
-    public MemberServiceImpl(MemberDao memberDao) {
-        this.memberDao = memberDao;
+    public MemberServiceImpl(MemberMapper memberMapper) {
+        this.memberMapper = memberMapper;
     }
 
     @Override
     public List<Member> getMemberList() {
-        return memberDao.getMemberList();
+        return memberMapper.getMemberList();
     }
 }
