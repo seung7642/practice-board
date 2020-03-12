@@ -1,5 +1,6 @@
 package com.pangtrue.practice.application.login.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Repository;
  * Time: 오후 11:11
  */
 @Repository
-public interface LoginDao {
+@Mapper
+public interface LoginMapper {
 }

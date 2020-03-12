@@ -1,6 +1,7 @@
 package com.pangtrue.practice.application.management.dao;
 
 import com.pangtrue.practice.application.management.domain.Member;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
  * Time: 오후 11:50
  */
 @Repository
-public interface MemberDao {
+@Mapper
+public interface MemberMapper {
 
     List<Member> getMemberList();
 }
