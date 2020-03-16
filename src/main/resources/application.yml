@@ -1,9 +1,12 @@
-# 로그 설정 ( 후에 slf4j를 사용해서 로그 찍을거임 )
+# LOGGING
 logging.level:
   org.springframework: INFO
   com.practice: DEBUG
 
-# Pebble 설정
+# SERVER
+server.port: 8080
+
+# PEBBLE
 pebble:
   enabled: true
   prefix: /templates/
@@ -16,7 +19,7 @@ pebble:
   defaultLocale: ko_KR
   strictVariables: false
 
-# DB 커넥션 정보
+# DATABASE CONNECTION
 spring:
   datasource:
     hikari:
@@ -27,6 +30,6 @@ spring:
   servlet:
     multipart:
       max-file-size: 5MB
-      location: /Users/seung7642/neowiz-data/board
+      location: /Users/seung7642/pangtrue/board
       max-request-size: 40MB
       file-size-threshold: 20971520

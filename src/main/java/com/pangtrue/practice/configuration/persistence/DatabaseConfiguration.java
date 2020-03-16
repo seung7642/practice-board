@@ -1,4 +1,4 @@
-package com.pangtrue.practice.configuration;
+package com.pangtrue.practice.configuration.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
