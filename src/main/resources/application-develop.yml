@@ -1,0 +1,19 @@
+# -------------------------------
+# CORE PROPERTIES
+# -------------------------------
+
+# LOGGING
+logging.level:
+  com.practice: DEBUG
+  org.springframework: INFO
+  org.springframework.boot: INFO
+
+# SERVER
+server.port: 8181
+
+# DATABASE CONNECTION
+spring.datasource.hikari:
+  driver-class: com.mysql.cj.jdbc.Driver
+  jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+  username: pangtrue
+  password: pangtrue1234!@#$

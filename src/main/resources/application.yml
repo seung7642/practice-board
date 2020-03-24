@@ -1,3 +1,10 @@
+# -------------------------------
+# CORE PROPERTIES
+# -------------------------------
+
+# IDENTITY
+spring.application.name: practice-board
+
 # LOGGING
 logging.level:
   org.springframework: INFO
@@ -20,15 +27,14 @@ pebble:
   strictVariables: false
 
 # DATABASE CONNECTION
-spring:
-  datasource:
-    hikari:
+spring.datasource.hikari:
       driver-class: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
       username: pangtrue
       password: pangtrue1234!@#$
-  servlet:
-    multipart:
+
+# SPRING MULTIPART
+spring.servlet.multipart:
       max-file-size: 5MB
       location: /Users/seung7642/pangtrue/board
       max-request-size: 40MB

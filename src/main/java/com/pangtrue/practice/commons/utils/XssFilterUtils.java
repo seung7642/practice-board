@@ -7,5 +7,10 @@ package com.pangtrue.practice.commons.utils;
  */
 public class XssFilterUtils {
 
-    // TODO : lucy 라이브러리 사용하기.
+    /**
+     * XSS 대응 적용 기술은 총 3가지.
+     *   1. HttpHeaderSecurityFilter
+     *   2. Pebble Escape,
+     *   3. Lucy XSS Servlet Filter (Lucy XSS Filter)
+     */
 }
