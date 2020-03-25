@@ -2,6 +2,7 @@ package com.pangtrue.practice.configuration.persistence;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
+@Slf4j
 @Configuration
 public class DatabaseConfiguration {
 
@@ -25,7 +27,7 @@ public class DatabaseConfiguration {
     private ApplicationContext applicationContext;
 
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource.hikari") // application.yml에 있는 값을 읽어
+    @ConfigurationProperties(prefix="spring.datasource.hikari")
     public HikariConfig hikariConfig(){
         return new HikariConfig();
     }
