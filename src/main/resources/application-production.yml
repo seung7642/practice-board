@@ -3,7 +3,7 @@
 # -------------------------------
 
 # PROFILE
-spring.profiles.active: develop
+spring.profiles.active: production
 
 # LOGGING
 logging.level:
