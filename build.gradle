@@ -44,4 +44,13 @@ dependencies {
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
 	compile(group: 'net.coobird', name: 'thumbnailator', version: '0.4.1')
 	compile(group: 'net.sf.jmimemagic', name: 'jmimemagic', version: '0.1.5')
+
+	testImplementation('org.junit.jupiter:junit-jupiter:5.6.1')
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
