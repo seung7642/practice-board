@@ -2,7 +2,6 @@ package com.pangtrue.practice.application.management.dao;
 
 import com.pangtrue.practice.application.management.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

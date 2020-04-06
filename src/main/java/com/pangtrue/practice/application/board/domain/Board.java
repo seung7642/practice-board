@@ -1,6 +1,8 @@
 package com.pangtrue.practice.application.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 
@@ -13,17 +15,22 @@ import java.util.Date;
  * Time: 오후 8:18
  */
 @Alias("Board")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class Board {
-    private int idx;
+
+    int idx;
+
     @NotBlank(message = "Title is mandatory !")
     @Length(max = 1024)
-    private String title;
+    String title;
+
     @NotBlank(message = "Content is mandatory !")
     @Length(max = 1024 * 1024)
-    private String content;
-    private String writer;
-    private Date regDate;
-    private Date updDate;
-    private int hits;
+    String content;
+
+    String writer;
+    Date regDate;
+    Date updDate;
+    int hits;
 }
