@@ -1,6 +1,8 @@
 package com.pangtrue.practice.application.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import org.apache.ibatis.type.Alias;
 
 /**
@@ -9,13 +11,13 @@ import org.apache.ibatis.type.Alias;
  * Time: 오후 8:18
  */
 @Alias("BoardAttach")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class BoardAttach {
 
-    private String uuid;
-    private String uploadPath;
-    private String fileName;
-    private boolean fileType;
-
-    private Long boardIdx;
+    String uuid;
+    String uploadPath;
+    String fileName;
+    boolean fileType;
+    Long boardIdx;
 }
