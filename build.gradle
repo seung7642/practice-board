@@ -1,5 +1,5 @@
 buildscript {
-	ext { // build.gradle에서 사용될 전역변수 선언
+	ext {
 		springBootVersion = '2.1.11.RELEASE'
 	}
 	repositories {
