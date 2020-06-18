@@ -8,7 +8,8 @@ spring.application.name: practice-board
 # LOGGING
 logging.level:
   org.springframework: INFO
-  com.practice: DEBUG
+  org.springframework.boot: INFO
+  com.pangtrue: DEBUG
 
 # SERVER
 server.port: 8080

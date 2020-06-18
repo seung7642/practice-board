@@ -22,4 +22,22 @@ public class XssFilterUtils {
         return Optional.of(result)
                 .filter((data) -> data <= 100 ? true : false);
     }
+
+//    public static String escape(String value) {
+//        return XssPreventer.escape(value);
+//    }
+//
+//    public static String unescape(String value) {
+//        return XssPreventer.unescape(value);
+//    }
+//
+//    public static String html(String value) {
+//        LucyXssFilter filter = XssSaxFilter.getInstance("lucy-xss-sax.xml", true);
+//        return filter.doFilter(XssPreventer.unescape(value));
+//    }
+//
+//    public static String editor(String value) {
+//        LucyXssFilter filter = XssSaxFilter.getInstance("lucy-xss-sax-editor.xml", true);
+//        return filter.doFilter(XssPreventer.unescape(value));
+//    }
 }
