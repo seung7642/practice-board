@@ -27,13 +27,13 @@ public class DatabaseConfiguration {
     private ApplicationContext applicationContext;
 
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource.hikari")
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public HikariConfig hikariConfig(){
         return new HikariConfig();
     }
 
     @Bean
-    public DataSource dataSource() throws Exception {
+    public DataSource dataSource() {
         return new HikariDataSource(hikariConfig());
     }
 

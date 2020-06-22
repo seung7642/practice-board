@@ -3,14 +3,18 @@ package com.pangtrue.practice.application.management.web;
 import com.pangtrue.practice.application.management.domain.Member;
 import com.pangtrue.practice.application.management.service.MemberService;
 import com.pangtrue.practice.commons.exception.MessageException;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -18,29 +22,22 @@ import java.util.List;
  * Time: 오후 11:35
  */
 @Slf4j
-@RestController
+@AllArgsConstructor
+@Controller
 @RequestMapping(value = "/member")
 public class MemberController {
 
     private final MemberService memberService;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
-
     @PostMapping(value = "/list")
-    public ResponseEntity<List<Member>> memberList() {
-        ResponseEntity<List<Member>> entity = null;
-
+    @ResponseBody
+    public ResponseEntity memberList() {
         try {
-            List<Member> list = memberService.getMemberList();
-            entity = new ResponseEntity<>(list, HttpStatus.OK);
+            return ResponseEntity.of(Optional.of(memberService.getMemberList()));
         } catch (MessageException e) {
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.of(null);
         } catch (Exception e) {
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.of(null);
         }
-
-        return entity;
     }
 }

@@ -10,5 +10,5 @@ public interface MemberService {
      * 멤버 리스트를 반환한다.
      * @return List<Member>
      */
-    public List<Member> getMemberList();
+    List<Member> getMemberList();
 }

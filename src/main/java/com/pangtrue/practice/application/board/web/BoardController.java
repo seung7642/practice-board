@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -35,49 +37,37 @@ public class BoardController {
 
     @GetMapping(value = "/list")
     @ResponseBody
-    public ModelAndView list(ModelAndView mnv, @PageableDefault(page = 1, size = 10) Pageable pageable) {
+    public ResponseEntity list(@PageableDefault(page = 1, size = 10) Pageable pageable) {
         log.debug("요청으로 들어온 pageNumber = {}, pageSize = {}", pageable.getPageNumber(), pageable.getPageSize());
-
-        mnv.addObject("boardList", boardService.getArticleList(pageable));
-        mnv.setViewName("board/list");
-        return mnv;
+        return ResponseEntity.of(Optional.of(boardService.getArticleList(pageable)));
     }
 
     @GetMapping(value = "/write")
     @ResponseBody
-    public ModelAndView write(ModelAndView mnv) {
-        mnv.setViewName("board/write");
-        return mnv;
+    public ResponseEntity write() {
+        return ResponseEntity.of(null);
     }
 
     @PostMapping(value = "/write")
     @ResponseBody
-    public Board write(@Valid @RequestBody Board board, BindingResult bindingResult) {
+    public ResponseEntity write(@Valid @RequestBody Board board) {
         log.info("JSON으로 넘어온 데이터 : {}", board.toString());
-        return boardService.getArticle(boardService.insertArticle(board));
+        return ResponseEntity.of(Optional.of(boardService.getArticle(boardService.insertArticle(board))));
     }
 
     @GetMapping(value = "/read")
     @ResponseBody
-    public ModelAndView read(@RequestParam("idx") Integer idx, ModelAndView mnv) {
+    public ResponseEntity read(@RequestParam("idx") Integer idx) {
         log.info("읽고자하는 글 번호 : {}", idx);
-
-        try {
-            boardService.updateHits(idx);
-            mnv.addObject("article", boardService.getArticle(idx));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mnv.setViewName("board/read");
-        return mnv;
+        boardService.updateHits(idx);
+        return ResponseEntity.of(Optional.of(boardService.getArticle(idx)));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NotValidException.class)
-    public void handleNotValidExceptions(NotValidException ex) throws Exception {
+    public ResponseEntity handleNotValidExceptions(NotValidException ex) {
         log.error(ex.getMessage());
-        throw new Exception();
+        return ResponseEntity.of(null);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -94,5 +84,12 @@ public class BoardController {
         });
 
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleExceptions(Exception ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.of(null);
     }
 }
