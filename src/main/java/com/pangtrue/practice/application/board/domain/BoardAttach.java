@@ -10,14 +10,14 @@ import org.apache.ibatis.type.Alias;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
-@Alias("BoardAttach")
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Alias("BoardAttach")
 public class BoardAttach {
 
-    String uuid;
-    String uploadPath;
-    String fileName;
-    boolean fileType;
-    Long boardIdx;
+    private String uuid;
+    private String uploadPath;
+    private String fileName;
+    private boolean fileType;
+    private Long boardIdx;
 }

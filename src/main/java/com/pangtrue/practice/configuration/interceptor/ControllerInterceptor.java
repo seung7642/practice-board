@@ -1,6 +1,7 @@
 package com.pangtrue.practice.configuration.interceptor;
 
 import com.pangtrue.practice.application.login.service.LoginService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -16,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 17:30
  */
 @Slf4j
+@AllArgsConstructor
 public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
     private LoginService loginService;
 
     @Override

@@ -16,13 +16,6 @@ public class XssFilterUtils {
      *   3. Lucy XSS Servlet Filter (Lucy XSS Filter)
      */
 
-    public Optional<Integer> calculate(int a, int b, Calc calcImpl) {
-        Integer result = calcImpl.operate(a, b);
-
-        return Optional.of(result)
-                .filter((data) -> data <= 100 ? true : false);
-    }
-
 //    public static String escape(String value) {
 //        return XssPreventer.escape(value);
 //    }

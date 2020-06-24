@@ -14,23 +14,23 @@ import java.util.Date;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
-@Alias("Board")
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Alias("Board")
 public class Board {
 
-    int idx;
+    private Integer idx;
 
     @NotBlank(message = "Title is mandatory !")
     @Length(max = 1024)
-    String title;
+    private String title;
 
     @NotBlank(message = "Content is mandatory !")
     @Length(max = 1024 * 1024)
-    String content;
+    private String content;
 
-    String writer;
-    Date regDate;
-    Date updDate;
-    int hits;
+    private String writer;
+    private Date regDate;
+    private Date updDate;
+    private Integer hits;
 }

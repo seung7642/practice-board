@@ -6,6 +6,7 @@ import com.pangtrue.practice.application.board.domain.Criteria;
 import com.pangtrue.practice.application.board.domain.PageMaker;
 import com.pangtrue.practice.application.board.service.BoardService;
 import com.pangtrue.practice.commons.exception.NotValidException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
+@Slf4j
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -29,8 +31,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public PageMaker<Board> getArticleList(Pageable pageable) {
-        PageMaker<Board> pageMaker = new PageMaker<Board>(
+    public PageMaker getArticleList(Pageable pageable) {
+        PageMaker<Board> pageMaker = new PageMaker<>(
                 boardMapper.getArticleList(new Criteria(pageable.getPageNumber(), pageable.getPageSize())),
                 pageable,
                 boardMapper.getArticleCount()
@@ -46,7 +48,9 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public int insertArticle(Board board) throws NotValidException {
         // Service단에서 파라미터로 넘어온 Board 객체에 대한 유효성 검증 처리 로직
-        if (!isValid(board)) throw new NotValidException();
+        if (!isValid(board)) {
+            throw new NotValidException();
+        }
 
         return boardMapper.insertArticle(board);
     }

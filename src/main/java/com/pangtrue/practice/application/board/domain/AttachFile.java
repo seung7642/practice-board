@@ -9,8 +9,8 @@ import lombok.experimental.FieldDefaults;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AttachFile {
 
     private String fileName;

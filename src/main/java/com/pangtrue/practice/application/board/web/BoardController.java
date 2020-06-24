@@ -30,35 +30,32 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 @Controller
-@RequestMapping(value = "/board")
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     @ResponseBody
     public ResponseEntity list(@PageableDefault(page = 1, size = 10) Pageable pageable) {
-        log.debug("요청으로 들어온 pageNumber = {}, pageSize = {}", pageable.getPageNumber(), pageable.getPageSize());
         return ResponseEntity.of(Optional.of(boardService.getArticleList(pageable)));
     }
 
-    @GetMapping(value = "/write")
+    @GetMapping("/write")
     @ResponseBody
     public ResponseEntity write() {
         return ResponseEntity.of(null);
     }
 
-    @PostMapping(value = "/write")
+    @PostMapping("/write")
     @ResponseBody
     public ResponseEntity write(@Valid @RequestBody Board board) {
-        log.info("JSON으로 넘어온 데이터 : {}", board.toString());
         return ResponseEntity.of(Optional.of(boardService.getArticle(boardService.insertArticle(board))));
     }
 
-    @GetMapping(value = "/read")
+    @GetMapping("/read")
     @ResponseBody
     public ResponseEntity read(@RequestParam("idx") Integer idx) {
-        log.info("읽고자하는 글 번호 : {}", idx);
         boardService.updateHits(idx);
         return ResponseEntity.of(Optional.of(boardService.getArticle(idx)));
     }

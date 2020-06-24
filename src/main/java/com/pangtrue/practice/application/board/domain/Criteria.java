@@ -1,6 +1,8 @@
 package com.pangtrue.practice.application.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import org.apache.ibatis.type.Alias;
 
 /**
@@ -8,13 +10,14 @@ import org.apache.ibatis.type.Alias;
  * Date: 2020. 1. 10.
  * Time: 오후 8:18
  */
-@Alias("Criteria")
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Alias("Criteria")
 public class Criteria {
 
-    private int pageNum;
-    private int amount;
-    private int startRowNumber;
+    private Integer pageNum;
+    private Integer amount;
+    private Integer startRowNumber;
 
     public Criteria() {
         this(1, 10); // 페이지 번호 1, 1개의 페이지당 게시글 수는 10개로 설정

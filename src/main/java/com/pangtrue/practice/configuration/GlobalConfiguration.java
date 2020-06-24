@@ -10,5 +10,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @Configuration
 @EnableWebMvc // 해당 어노테이션을 선언함으로써 WebMvcAutoConfiguration이 비활성화된다.
-public class PangtrueConfiguration {
+public class GlobalConfiguration {
 }

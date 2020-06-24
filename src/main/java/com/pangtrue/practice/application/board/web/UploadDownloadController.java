@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -30,72 +31,64 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/board")
+@RequestMapping("/board")
 public class UploadDownloadController {
 
     private static final String UPLOAD_PATH = "/Users/seung7642/neowiz-data/board";
     private final UploadDownloadService uploadDownloadService;
 
-    @PostMapping(value = "/upload")
-    public ResponseEntity<AttachFile> upload(MultipartFile uploadFile) {
-        ResponseEntity<AttachFile> entity = null;
-
+    @PostMapping("/upload")
+    public ResponseEntity upload(MultipartFile uploadFile) {
         try {
-            entity = new ResponseEntity<>(UploadFileUtils.uploadFile(uploadFile), HttpStatus.CREATED);
-        } catch (Exception e) {
-            log.error("파일첨부 작업 중 예외 발생 : {}", e.getMessage());
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.of(Optional.of(UploadFileUtils.uploadFile(uploadFile)));
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.of(null);
         }
-        return entity;
     }
 
-    @GetMapping(value = "/display")
-    public ResponseEntity<byte[]> display(@RequestParam("filename") String fileName) {
-        log.info("브라우저에 노출시킬 이미지 파일명 : {}", fileName);
-        ResponseEntity<byte[]> result = null;
+    @GetMapping("/display")
+    public ResponseEntity display(@RequestParam("filename") String fileName) {
         HttpHeaders headers = new HttpHeaders();
 
         try {
             headers.add("Content-Type", UploadFileUtils.getMimeType(fileName));
-            result = new ResponseEntity<>(UploadFileUtils.displayFile(fileName), headers, HttpStatus.OK);
-        } catch (IOException e) {
-            log.debug(e.getMessage(), e);
-            result = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(UploadFileUtils.displayFile(fileName), headers, HttpStatus.OK);
+        } catch (IOException ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.of(null);
         }
-        return result;
     }
 
     @GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<Resource> download(@RequestHeader("User-Agent") String userAgent,
-                                             @RequestParam("filename") String fileName) {
-        log.info("다운로드할 파일명 : {}", fileName);
+    public ResponseEntity download(@RequestHeader("User-Agent") String userAgent,
+                                   @RequestParam("filename") String fileName) {
 
-        ResponseEntity<Resource> entity = null;
         Resource resource = new FileSystemResource(UPLOAD_PATH + "/" + fileName);
         if (!resource.exists()) {
             throw new ResourceNotFoundException();
         }
-        log.info("resource : {}", resource);
 
         String resourceName = resource.getFilename();
         HttpHeaders headers = new HttpHeaders();
-
         try {
             headers.add("Content-Disposition",
                     "attachment; filename=" + DownloadFileUtils.getDownloadName(userAgent, resourceName));
-            entity = new ResponseEntity<>(resource, headers, HttpStatus.OK);
-        } catch (UnsupportedEncodingException e) {
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (ResourceNotFoundException e) {
-            entity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+        } catch (UnsupportedEncodingException ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.of(null);
+        } catch (ResourceNotFoundException ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.of(null);
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.of(null);
         }
-        return entity;
     }
 
     @GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<BoardAttach>> getAttachList(int boardIdx) {
-        return new ResponseEntity<>(uploadDownloadService.getAttachList(boardIdx), HttpStatus.OK);
+    public ResponseEntity getAttachList(int boardIdx) {
+        return ResponseEntity.of(Optional.of(uploadDownloadService.getAttachList(boardIdx)));
     }
 }
