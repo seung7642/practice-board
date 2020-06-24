@@ -60,6 +60,11 @@ public class BoardServiceImpl implements BoardService {
         boardMapper.updateHits(idx);
     }
 
+    @Override
+    public Integer deleteArticle(Integer idx) {
+        return boardMapper.deleteArticle(idx);
+    }
+
     private boolean isValid(Board board) {
         if (board.getTitle().isEmpty() || board.getContent().isEmpty()) {
             return false;

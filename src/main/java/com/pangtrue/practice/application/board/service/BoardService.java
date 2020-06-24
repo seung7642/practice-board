@@ -19,7 +19,7 @@ public interface BoardService {
      * @param pageable
      * @return PageMaker<Board>
      */
-    PageMaker<Board> getArticleList(Pageable pageable);
+    PageMaker getArticleList(Pageable pageable);
 
     /**
      * 전체 게시글의 갯수를 가져온다.
@@ -41,4 +41,12 @@ public interface BoardService {
      * @return void
      */
     void updateHits(Integer idx);
+
+    /**
+     * 게시글을 삭제한다.
+     *
+     * @param idx
+     * @return
+     */
+    Integer deleteArticle(Integer idx);
 }

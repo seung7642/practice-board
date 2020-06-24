@@ -60,6 +60,12 @@ public class BoardController {
         return ResponseEntity.of(Optional.of(boardService.getArticle(idx)));
     }
 
+    @DeleteMapping("delete")
+    @ResponseBody
+    public ResponseEntity delete(@RequestParam("idx") Integer idx) {
+        return ResponseEntity.of(Optional.of(boardService.deleteArticle(idx)));
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NotValidException.class)
     public ResponseEntity handleNotValidExceptions(NotValidException ex) {

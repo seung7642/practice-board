@@ -52,4 +52,12 @@ public interface BoardMapper {
      * @param idx
      */
     void updateHits(Integer idx);
+
+    /**
+     * 게시글을 삭제한다.
+     *
+     * @param idx
+     * @return
+     */
+    Integer deleteArticle(Integer idx);
 }

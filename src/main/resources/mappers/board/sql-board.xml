@@ -66,4 +66,11 @@
         WHERE
             idx = #{idx}
     </update>
+
+    <delete id="deleteArticle">
+        DELETE FROM
+            practice_board.BOARD_TBL
+        WHERE
+            idx = #{idx}
+    </delete>
 </mapper>
