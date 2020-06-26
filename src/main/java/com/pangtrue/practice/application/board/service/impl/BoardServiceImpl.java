@@ -47,7 +47,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int insertArticle(Board board) throws NotValidException {
-        // Service단에서 파라미터로 넘어온 Board 객체에 대한 유효성 검증 처리 로직
         if (!isValid(board)) {
             throw new NotValidException();
         }
