@@ -46,6 +46,7 @@ dependencies {
 	implementation ("mysql:mysql-connector-java:8.0.17")
 	implementation ("net.coobird:thumbnailator:0.4.1")
 	implementation ("net.sf.jmimemagic:jmimemagic:0.1.5")
+	implementation ("com.navercorp.lucy:lucy-xss:1.6.3")
 
 	implementation views
 	implementation filters

@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -26,7 +28,8 @@ public class WebUtils {
 
     public static final String CONTEXT_PATH_SEPARATOR = "/";
 
-    public static List<String> REQUEST_REMOTE_ADDR_HEADER_NAMES = Lists.newArrayList("X-Forwarded-For",
+    public static List<String> REQUEST_REMOTE_ADDR_HEADER_NAMES = Lists.newArrayList(
+            "X-Forwarded-For",
             "X-Citrix-For",
             "X-RealIP",
             "Proxy-Client-IP",

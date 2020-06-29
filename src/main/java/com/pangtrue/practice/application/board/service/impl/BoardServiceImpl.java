@@ -6,6 +6,7 @@ import com.pangtrue.practice.application.board.domain.Criteria;
 import com.pangtrue.practice.application.board.domain.PageMaker;
 import com.pangtrue.practice.application.board.service.BoardService;
 import com.pangtrue.practice.commons.exception.NotValidException;
+import com.pangtrue.practice.commons.utils.PreconditionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -47,9 +48,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int insertArticle(Board board) throws NotValidException {
-        if (!isValid(board)) {
-            throw new NotValidException();
-        }
+        PreconditionUtils.invalidCondition((board.getTitle().isEmpty() || board.getContent().isEmpty()), "Invalid parameter.");
 
         return boardMapper.insertArticle(board);
     }
@@ -62,12 +61,5 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Integer deleteArticle(Integer idx) {
         return boardMapper.deleteArticle(idx);
-    }
-
-    private boolean isValid(Board board) {
-        if (board.getTitle().isEmpty() || board.getContent().isEmpty()) {
-            return false;
-        }
-        return true;
     }
 }
