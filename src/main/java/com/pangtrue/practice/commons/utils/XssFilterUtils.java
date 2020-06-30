@@ -3,8 +3,8 @@ package com.pangtrue.practice.commons.utils;
 import com.nhncorp.lucy.security.xss.LucyXssFilter;
 import com.nhncorp.lucy.security.xss.XssPreventer;
 import com.nhncorp.lucy.security.xss.XssSaxFilter;
-
-import java.util.Optional;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -17,6 +17,10 @@ import java.util.Optional;
  *   3. Lucy XSS Servlet Filter (Lucy XSS Filter)
  */
 public class XssFilterUtils {
+
+    @Getter
+    @Setter
+    private static boolean on = false;
 
     public static String escape(String value) {
         return XssPreventer.escape(value);

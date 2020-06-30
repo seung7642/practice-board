@@ -5,9 +5,12 @@ import com.pangtrue.practice.commons.utils.WebUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +47,29 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        super.postHandle(request, response, handler, modelAndView);
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+        if (!(handler instanceof HandlerMethod)) {
+            return;
+        }
+
+    }
+
+    private boolean isAvableServiceVariable(ModelAndView modelAndView) {
+        if (modelAndView != null
+                && !(modelAndView.getView() instanceof RedirectView)
+                && !(modelAndView.getViewName() == null)
+                && !modelAndView.getViewName().startsWith("redirect:")
+                && !modelAndView.getViewName().startsWith("check/live")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private ModelMap getServiceVariables(HttpServletRequest request) {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("MEMBER", loginService.getMember());
+
+        return modelMap;
     }
 }

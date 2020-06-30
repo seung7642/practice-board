@@ -1,5 +1,7 @@
 package com.pangtrue.practice.application.login.service;
 
+import com.pangtrue.practice.application.management.domain.Member;
+
 public interface LoginService {
 
     /**
@@ -21,4 +23,10 @@ public interface LoginService {
      * @return boolean
      */
     boolean isLogin();
+
+    /**
+     * 로그인한 사용자의 회원 정보를 가져온다.
+     * @return Member
+     */
+    Member getMember();
 }

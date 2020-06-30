@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface MemberMapper {
+public interface MemberDao {
 
     List<Member> getMemberList();
 

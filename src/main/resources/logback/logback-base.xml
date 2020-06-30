@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Base logback configuration provided for compatibility.
+-->
+
+<included>
+    <!-- base property -->
+    <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name" defaultValue="UNKNOWN" />
+    <springProperty scope="context" name="PROFILES" source="spring.profiles.active" defaultValue="" />
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="MDCS_LOG_PATTERN" value="%clr(* MDCs - req.remoteHost  : %X{req.remoteHost}%n* MDCs - req.requestURL  : %X{req.requestURL}%n* MDCs - req.requestURI  : %X{req.requestURI}%n* MDCs - req.method      : %X{req.method}%n* MDCs - req.queryString : %X{req.queryString}%n* MDCs - req.userAgent   : %X{req.userAgent}%n* MDCs - req.remoteAddr  : %X{req.remoteAddr}%n* MDCs - req.referer     : %X{req.referer}%n${MDCS_LOG_CUSTOM_PATTERN:- })" />
+    <property name="STDOUT_LOG_PATTERN" value="%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-50.50(%logger{49}.%method)){cyan} %clr(:){faint} %m%n" />
+    <property name="STDERR_LOG_PATTERN" value="%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-50.50(%logger{49}.%method)){cyan} %clr(:){faint} %m%n${MDCS_LOG_PATTERN} ${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+
+    <!-- logstash property -->
+    <springProperty scope="context" name="SUMMER_LOGSTASH_HOSTS" source="summer.logstash.hosts" defaultValue="" />
+    <springProperty scope="context" name="SUMMER_LOGSTASH_TIMEZONE" source="summer.logstash.timeZone" defaultValue="UTC" />
+    <springProperty scope="context" name="SUMMER_LOGSTASH_CONNECTIONTTL" source="summer.logstash.connection-ttl" defaultValue="5 minutes" />
+    <springProperty scope="context" name="SUMMER_LOGSTASH_RECONNECTIONDELAY" source="summer.logstash.reconnection-delay" defaultValue="1 second" />
+
+    <property name="LOGSTASH_LOGS_PATTERN" value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-50.50(%logger{49}.%method) : %m"/>
+    <property name="LOGSTASH_MDCS_PATTERN" value="* MDCs - req.remoteHost  : %X{req.remoteHost}%n* MDCs - req.requestURL  : %X{req.requestURL}%n* MDCs - req.requestURI  : %X{req.requestURI}%n* MDCs - req.method      : %X{req.method}%n* MDCs - req.queryString : %X{req.queryString}%n* MDCs - req.userAgent   : %X{req.userAgent}%n* MDCs - req.remoteAddr  : %X{req.remoteAddr}%n* MDCs - req.referer     : %X{req.referer}%n${MDCS_LOG_CUSTOM_PATTERN:- }"/>
+    <property name="LOGSTASH_NEW_LINE" value="%n"/>
+</included>
