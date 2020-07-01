@@ -47,6 +47,7 @@ dependencies {
 	implementation ("net.coobird:thumbnailator:0.4.1")
 	implementation ("net.sf.jmimemagic:jmimemagic:0.1.5")
 	implementation ("com.navercorp.lucy:lucy-xss:1.6.3")
+	implementation ("org.mindrot:jbcrypt:0.4")
 
 	implementation views
 	implementation filters

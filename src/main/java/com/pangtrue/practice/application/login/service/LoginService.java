@@ -29,4 +29,11 @@ public interface LoginService {
      * @return Member
      */
     Member getMember();
+
+    /**
+     * 해당 아이디가 로그인 중인지 확인한다. (동시 사용 방지)
+     * @param userId
+     * @return
+     */
+    boolean isUsing(String userId);
 }

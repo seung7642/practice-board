@@ -7,12 +7,16 @@ import com.pangtrue.practice.commons.utils.PreconditionUtils;
 import com.pangtrue.practice.commons.utils.XssFilterUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -23,7 +27,7 @@ import java.util.Hashtable;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements LoginService, HttpSessionBindingListener {
 
     private static final String SESSION_NAME_MEMBER = "MEMBER";
     private static Hashtable loginUsers = new Hashtable();
@@ -44,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
 
         Member member = memberDao.getMember(id);
         PreconditionUtils.invalidCondition(member == null, "You have entered the wrong user name or password. Please check again.");
-//        PreconditionUtils.invalidCondition(!BCrypt.checkpw(pw, member.getPw()), "You have entered the wrong user name or password. Please check again.");
+        PreconditionUtils.invalidCondition(!BCrypt.checkpw(pw, member.getPw()), "You have entered the wrong user name or password. Please check again.");
 
         // 중복 로그인 체크
         if (isUsing(id)) {
@@ -65,22 +69,35 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void logout() {
-
+        HttpSession session = request.getSession();
+        if (session != null) {
+            session.invalidate();
+        }
     }
 
     @Override
     public boolean isLogin() {
+        Member member = getMember();
+        if (member == null) {
+            return false;
+        }
 
-        return false;
+        return !StringUtils.isEmpty(member.getId());
     }
 
     @Override
     public Member getMember() {
-        return null;
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return null;
+        }
+
+        return (Member) session.getAttribute(SESSION_NAME_MEMBER);
     }
 
-    public boolean isUsing(String userID) {
-        return loginUsers.containsValue(userID);
+    @Override
+    public boolean isUsing(String userId) {
+        return loginUsers.containsValue(userId);
     }
 
     private HttpSession newSession(HttpServletRequest request) {
@@ -114,5 +131,23 @@ public class LoginServiceImpl implements LoginService {
 
     public void setMenuAuth(Member member) {
         // TODO: Menu Auth 등록
+    }
+
+    /**
+     * 세션이 연결될 때 Hashtable에 접속자를 저장한다. (해당 메서드는 세션이 연결될 때 자동으로 호출된다.)
+     * @param event
+     */
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+        loginUsers.put(event.getSession(), event.getName());
+    }
+
+    /**
+     * 세션이 끊기면 Hashtable에 있는 접속자 정보를 제거한다. (해당 메서드는 세션이 끊길 때 자동으로 호출된다.)
+     * @param event
+     */
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+        loginUsers.remove(event.getSession());
     }
 }
