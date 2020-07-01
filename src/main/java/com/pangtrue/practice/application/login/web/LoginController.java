@@ -26,12 +26,32 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping(value = "/login")
-    public String login(@RequestParam(value = "rUrl", required = false, defaultValue = "") String rUrl) {
+    public String loginGET(@RequestParam(value = "rUrl", required = false, defaultValue = "") String rUrl) {
         if (loginService.isLogin()) {
             loginService.logout();
         }
 
         return "login/main";
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public ResponseBase loginPOST(@RequestParam(value = "id", defaultValue = "") String id,
+                                  @RequestParam(value = "pw", defaultValue = "") String pw,
+                                  @RequestParam(value = "rUrl", defaultValue = "") String rUrl) {
+        try {
+            String result = loginService.login(id, pw);
+            if ("true".equals(result)) {
+                return ResponseBase.of(RETURN_TP.OK, "", true);
+            } else if ("isUsing".equals(result)) {
+                return ResponseBase.of(RETURN_TP.OK, "This ID is already taken.", true);
+            } else {
+                return ResponseBase.of(RETURN_TP.FAIL, "Login failed.", false);
+            }
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseBase.of(RETURN_TP.FAIL, "login failed", false);
+        }
     }
 
     @GetMapping("/logout")

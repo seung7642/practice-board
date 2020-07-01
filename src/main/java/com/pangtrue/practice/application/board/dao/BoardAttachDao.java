@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface BoardAttachMapper {
+public interface BoardAttachDao {
 
     /**
      * 업로드 테이블에 insert한다.

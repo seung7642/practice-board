@@ -30,6 +30,11 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * 어떤 경로든 접근했을 때 로그인 여부를 확인하여 로그인이 되어있지 않다면 '/login' 경로로 리다이렉트시킨다.
+     * @param request
+     * @param response
+     * @param handler
+     * @return boolean
+     * @throws Exception
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

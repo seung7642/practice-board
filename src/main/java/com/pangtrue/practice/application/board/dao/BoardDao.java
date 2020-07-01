@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface BoardMapper {
+public interface BoardDao {
 
     /**
      * 게시글 1개를 가져온다.
