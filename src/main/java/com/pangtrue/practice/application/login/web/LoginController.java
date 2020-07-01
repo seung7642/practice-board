@@ -1,11 +1,15 @@
 package com.pangtrue.practice.application.login.web;
 
 import com.pangtrue.practice.application.login.service.LoginService;
+import com.pangtrue.practice.commons.constants.RETURN_TP;
+import com.pangtrue.practice.infrastructure.entity.ResponseBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,9 +26,32 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping(value = "/login")
-    @ResponseBody
-    public ResponseEntity login(ModelAndView mnv) {
+    public String login(@RequestParam(value = "rUrl", required = false, defaultValue = "") String rUrl) {
+        if (loginService.isLogin()) {
+            loginService.logout();
+        }
 
-        return ResponseEntity.of(null);
+        return "login/main";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        loginService.logout();
+        return "redirect:/main";
+    }
+
+    @PostMapping("/login/findPassword")
+    @ResponseBody
+    public ResponseBase findPassword(@RequestParam(value = "findId") String findId,
+                                     @RequestParam(value = "findEmail") String findEmail) {
+        try {
+            // TODO: 패스워드 찾기 로직 마무리하기.
+            loginService.findPassword(findId, findEmail);
+
+            return ResponseBase.of(RETURN_TP.OK, "", true);
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseBase.of(RETURN_TP.FAIL, "", false);
+        }
     }
 }

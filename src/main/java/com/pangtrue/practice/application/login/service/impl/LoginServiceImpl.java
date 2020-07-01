@@ -100,6 +100,11 @@ public class LoginServiceImpl implements LoginService, HttpSessionBindingListene
         return loginUsers.containsValue(userId);
     }
 
+    @Override
+    public boolean findPassword(String id, String email) {
+        return false;
+    }
+
     private HttpSession newSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {

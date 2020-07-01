@@ -31,9 +31,17 @@ public interface LoginService {
     Member getMember();
 
     /**
-     * 해당 아이디가 로그인 중인지 확인한다. (동시 사용 방지)
+     * 해당 아이디가 이미 사용 중인지 확인한다. (동시 사용 방지)
      * @param userId
-     * @return
+     * @return boolean
      */
     boolean isUsing(String userId);
+
+    /**
+     * 해당 사용자의 패스워드를 찾는다.
+     * @param id
+     * @param email
+     * @return boolean
+     */
+    boolean findPassword(String id, String email);
 }
