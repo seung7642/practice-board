@@ -11,7 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class BCryptTest {
 
     @Test
-    public void bCryptTest() {
+    public void 비밀번호_검증() {
         String hashpw = BCrypt.hashpw("password1234", BCrypt.gensalt());
         System.out.println("Hash PW: " + hashpw);
 
