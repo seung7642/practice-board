@@ -2,9 +2,11 @@ package com.pangtrue.practice.configuration.interceptor;
 
 import com.pangtrue.practice.application.login.service.LoginService;
 import com.pangtrue.practice.commons.utils.WebUtils;
+import com.pangtrue.practice.infrastructure.annotation.LoginNotRequired;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.method.HandlerMethod;
@@ -42,6 +44,10 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
+        if (isLoginNotRequired(handler)) {
+            return true;
+        }
+
         boolean isLogin = loginService.isLogin();
         if (!isLogin) {
             String redirectUrl = "/login?rUrl=" + URLEncoder.encode(WebUtils.getRequestServerUri(request), StandardCharsets.UTF_8.name());
@@ -57,6 +63,13 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
             return;
         }
 
+    }
+
+    private boolean isLoginNotRequired(Object handler) {
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        LoginNotRequired loginNotRequired = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), LoginNotRequired.class);
+
+        return (loginNotRequired != null);
     }
 
     private boolean isAvableServiceVariable(ModelAndView modelAndView) {

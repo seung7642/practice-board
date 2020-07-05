@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
  * Date: 2020. 3. 12.
@@ -72,6 +77,16 @@ public class LoginController {
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
             return ResponseBase.of(RETURN_TP.FAIL, "", false);
+        }
+    }
+
+    @PostMapping("/loginCheck")
+    @ResponseBody
+    public ResponseBase loginCheck() {
+        if (loginService.isLogin()) {
+            return ResponseBase.of(RETURN_TP.OK, "login", true);
+        } else {
+            return ResponseBase.of(RETURN_TP.FAIL, "Not login", false);
         }
     }
 }
