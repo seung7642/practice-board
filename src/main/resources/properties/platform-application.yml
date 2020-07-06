@@ -1,0 +1,12 @@
+# Common application properties
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# https://docs.spring.io/spring-boot/docs/2.1.12.RELEASE/reference/html/common-application-properties.html
+
+# Spring - HTTP
+spring.http.encoding.enabled: true
+spring.http.encoding.charset: UTF-8
+spring.http.encoding.force: true
+
+# Spring - MVC
+spring.mvc.favicon.enabled: false
+spring.mvc.static-path-pattern: /**
