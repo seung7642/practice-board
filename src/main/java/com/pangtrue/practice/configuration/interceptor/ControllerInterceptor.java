@@ -27,9 +27,9 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @NoArgsConstructor
-@AllArgsConstructor
 public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
+    @Autowired
     private LoginService loginService;
 
     /**
