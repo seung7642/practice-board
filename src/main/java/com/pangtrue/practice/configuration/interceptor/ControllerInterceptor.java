@@ -4,6 +4,7 @@ import com.pangtrue.practice.application.login.service.LoginService;
 import com.pangtrue.practice.commons.utils.WebUtils;
 import com.pangtrue.practice.infrastructure.annotation.LoginNotRequired;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -25,6 +26,7 @@ import java.nio.charset.StandardCharsets;
  * Time: 17:30
  */
 @Slf4j
+@NoArgsConstructor
 @AllArgsConstructor
 public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
@@ -45,7 +47,7 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (isLoginNotRequired(handler)) {
-            return true;
+//            return true;
         }
 
         boolean isLogin = loginService.isLogin();
