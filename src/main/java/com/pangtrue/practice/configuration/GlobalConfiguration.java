@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -36,7 +38,7 @@ public class GlobalConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-
+        argumentResolvers.add(pageableHandlerMethodArgumentResolver());
     }
 
     @Override
@@ -61,5 +63,13 @@ public class GlobalConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public ControllerInterceptor controllerInterceptor() {
         return new ControllerInterceptor();
+    }
+
+    private PageableHandlerMethodArgumentResolver pageableHandlerMethodArgumentResolver() {
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        resolver.setFallbackPageable(PageRequest.of(1, 10));
+        resolver.setOneIndexedParameters(false);
+
+        return resolver;
     }
 }
