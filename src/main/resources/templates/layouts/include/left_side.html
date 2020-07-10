@@ -1,0 +1,56 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link"> <img
+            src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">practice-board</span>
+    </a>
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            {% if users is empty %}
+                <div class="image">
+                    <img src="/img/default-user.png"
+                         class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block"> OFFLINE</a>
+                </div>
+            {% else %}
+                <div class="image">
+                    <img src="/{{ users.userImg }}" class="img-circle elevation-2"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <a href="#" class="d-block"> ONLINE</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="tree"
+                role="menu" data-accordion="false">
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active"><i class="nav-icon fas fa-th"></i>
+                    <p>게시판</p><i class="right fas fa-angle-left"></i></a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item"><a href="/board/list" class="nav-link a"> <i
+                                class="nav-icon fas fa-th"></i>
+                            <p>게시글 목록</p>
+                        </a></li>
+                        <li class="nav-item"><a href="/board/write" class="nav-link b"> <i
+                                class="nav-icon fas fa-th"></i>
+                            <p>게시글 작성</p>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

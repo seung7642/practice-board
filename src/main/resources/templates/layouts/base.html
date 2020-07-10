@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    {% block head %} {% endblock %}
+</head>
+<body class="hold-transition sidebar-mini skin-blue">
+
+    <div class="wrapper">
+        <!-- Main Header -->
+        {% include "layouts/include/main_header" %}
+
+        <!-- Left side column. contains the logo ans sidebar -->
+        {% include "layouts/include/left_side" %}
+
+        <!-- Content Wrapper. Contains page content -->
+        {% block content %} {% endblock %}
+
+        <!-- Main Footer -->
+        {% include "layouts/include/main_footer" %}
+    </div>
+
+    <!-- Plugins -->
+    {% include "layouts/include/plugins" %}
+
+    <!-- Additional Script -->
+    {% block script %} {% endblock %}
+
+</body>
+</html>
