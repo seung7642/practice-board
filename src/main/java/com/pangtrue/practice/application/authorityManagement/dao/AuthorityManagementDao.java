@@ -1,5 +1,6 @@
 package com.pangtrue.practice.application.authorityManagement.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
  * Time: 18:45
  */
 @Repository
+@Mapper
 public interface AuthorityManagementDao {
 
     /**

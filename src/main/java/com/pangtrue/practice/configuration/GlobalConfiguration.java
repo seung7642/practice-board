@@ -45,6 +45,7 @@ public class GlobalConfiguration extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(controllerInterceptor())
                 .addPathPatterns("/*")
+                .excludePathPatterns("/login")
                 .excludePathPatterns(EXCLUDE_RESOURCE_PATH_PATTERNS);
     }
 
