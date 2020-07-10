@@ -47,7 +47,7 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (isLoginNotRequired(handler)) {
-//            return true;
+            return true;
         }
 
         boolean isLogin = loginService.isLogin();
@@ -67,6 +67,12 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
 
     }
 
+    /**
+     * @LoginNotRequired 애너테이션이 붙은 메서드인지 확인한다.
+     * 로그인 검증이 필요없는 경로에 대한 접근이라면 '/login' 리다이렉트가 필요 없다.
+     * @param handler
+     * @return boolean
+     */
     private boolean isLoginNotRequired(Object handler) {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         LoginNotRequired loginNotRequired = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), LoginNotRequired.class);
