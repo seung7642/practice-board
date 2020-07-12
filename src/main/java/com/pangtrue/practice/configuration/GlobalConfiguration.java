@@ -38,7 +38,7 @@ public class GlobalConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(pageableHandlerMethodArgumentResolver());
+//        argumentResolvers.add(pageableHandlerMethodArgumentResolver());
     }
 
     @Override

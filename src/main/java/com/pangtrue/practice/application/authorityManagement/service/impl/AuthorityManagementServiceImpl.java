@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthorityManagementServiceImpl implements AuthorityManagementService {
 
-    private AuthorityManagementDao authorityManagementDao;
+    private final AuthorityManagementDao authorityManagementDao;
 
     @Override
     public boolean createGroup(String groupName) {
-        if (false == authorityManagementDao.createGroup(groupName)) {
+        if (0 > authorityManagementDao.createGroup(groupName)) {
             return false;
         }
 

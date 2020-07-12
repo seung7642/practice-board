@@ -3,12 +3,19 @@
 
 <mapper namespace="com.pangtrue.practice.application.authorityManagement.dao.AuthorityManagementDao">
 
-    <insert id="createGroup">
-
+    <insert id="createGroup" parameterType="String">
+        INSERT INTO group_list (
+            `name`,
+            reg_date
+        ) VALUES (
+            #{groupName},
+            #{now}
+        )
     </insert>
 
-    <delete id="deleteGroup">
-
+    <delete id="deleteGroup" parameterType="String">
+        DELETE FROM group_list
+        WHERE name = #{groupName}
     </delete>
 
 </mapper>
