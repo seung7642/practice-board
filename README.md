@@ -2,7 +2,7 @@
 
 ## 패키지 구성
 
-![image-20200716233603868](/Users/seungho/Library/Application Support/typora-user-images/image-20200716233603868.png){: width="100" height="100"}
+![image](https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png)
 
 
 
