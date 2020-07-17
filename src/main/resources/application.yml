@@ -5,16 +5,19 @@
 # IDENTITY
 spring.application.name: practice-board
 
-# LOGGING
-logging:
-#  config: classpath:logback/logback.xml
-  level:
-    org.springframework: INFO
-    org.springframework.boot: INFO
-    com.pangtrue: DEBUG
-
-# SERVER
-server.port: 8080
+spring:
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      location: /Users/seung7642/pangtrue/board
+      max-request-size: 40MB
+      file-size-threshold: 20971520
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 # PEBBLE
 pebble:
@@ -29,16 +32,36 @@ pebble:
   defaultLocale: ko_KR
   strictVariables: false
 
-# DATABASE CONNECTION
-spring.datasource.hikari:
-      driver-class: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/practice_board?allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
-      username: seung7642
-      password: password
+# LOGGING
+logging:
+#  config: classpath:logback/logback.xml
+  level:
+    org.springframework: INFO
+    org.springframework.boot: INFO
+    com.pangtrue: DEBUG
 
-# SPRING MULTIPART
-spring.servlet.multipart:
-      max-file-size: 5MB
-      location: /Users/seung7642/pangtrue/board
-      max-request-size: 40MB
-      file-size-threshold: 20971520
+# local 환경
+---
+spring:
+  profiles: local
+  datasource:
+    data: classpath:data-h2.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+
+# 운영 환경
+---
+spring.profiles: set1
+spring.profiles.include: real-db
+
+server.port: 8081
+---
+spring.profiles: set2
+spring.profiles.include: real-db
+
+server.port: 8080

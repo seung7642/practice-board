@@ -1,14 +1,10 @@
 package com.pangtrue.practice.application.board.web;
 
-import com.pangtrue.practice.application.board.domain.AttachFile;
-import com.pangtrue.practice.application.board.domain.BoardAttach;
-import com.pangtrue.practice.application.board.service.UploadDownloadService;
 import com.pangtrue.practice.commons.exception.ResourceNotFoundException;
 import com.pangtrue.practice.commons.utils.DownloadFileUtils;
 import com.pangtrue.practice.commons.utils.UploadFileUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.Optional;
 
 /**

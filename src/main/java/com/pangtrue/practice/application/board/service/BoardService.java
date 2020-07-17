@@ -1,52 +1,37 @@
 package com.pangtrue.practice.application.board.service;
 
-import com.pangtrue.practice.application.board.domain.Board;
-import com.pangtrue.practice.application.board.domain.PageMaker;
-import org.springframework.data.domain.Pageable;
+import com.pangtrue.practice.application.board.domain.BoardRepository;
+import com.pangtrue.practice.application.board.dto.BoardMainResponse;
+import com.pangtrue.practice.application.board.dto.BoardSaveRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface BoardService {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    /**
-     * 게시글 1개를 가져온다.
-     *
-     * @return Board
-     */
-    Board getArticle(Integer idx);
+/**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 1. 10.
+ * Time: 오후 8:18
+ */
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class BoardService {
 
-    /**
-     * 전체 게시글의 리스트를 가져온다.
-     *
-     * @param pageable
-     * @return PageMaker<Board>
-     */
-    PageMaker getArticleList(Pageable pageable);
+    private final BoardRepository boardRepository;
 
-    /**
-     * 전체 게시글의 갯수를 가져온다.
-     *
-     * @return int
-     */
-    int getArticleCount();
+    @Transactional
+    public Long save(BoardSaveRequest request) {
+        return boardRepository.save(request.toEntity()).getIdx();
+    }
 
-    /**
-     * 게시글 하나를 저장한다.
-     *
-     * @param board
-     */
-    int insertArticle(Board board);
-
-    /**
-     * 조회수를 +1 시킨다.
-     *
-     * @return void
-     */
-    void updateHits(Integer idx);
-
-    /**
-     * 게시글을 삭제한다.
-     *
-     * @param idx
-     * @return
-     */
-    Integer deleteArticle(Integer idx);
+    @Transactional(readOnly = true)
+    public List<BoardMainResponse> findAllDesc() {
+        return boardRepository.findAllDesc()
+                .map(BoardMainResponse::new)
+                .collect(Collectors.toList());
+    }
 }

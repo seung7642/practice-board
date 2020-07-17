@@ -43,6 +43,7 @@ dependencies {
 	implementation ("org.projectlombok:lombok")
 	annotationProcessor ("org.projectlombok:lombok")
 
+	implementation ("com.h2database:h2")
 	implementation ("mysql:mysql-connector-java:8.0.17")
 	implementation ("net.coobird:thumbnailator:0.4.1")
 	implementation ("net.sf.jmimemagic:jmimemagic:0.1.5")

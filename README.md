@@ -2,7 +2,7 @@
 
 ## 패키지 구성
 
-![image](https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png){: width="70%" height="70%"}
+![image](https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png)
 
 
 

@@ -1,19 +1,31 @@
 package com.pangtrue.practice.application.authorityManagement.service;
 
-public interface AuthorityManagementService {
+import com.pangtrue.practice.application.authorityManagement.domain.AuthorityRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
-    /**
-     * 그룹을 생성한다. (예를 들어, 관리자 그룹 또는 사용자 그룹)
-     * @param groupName
-     * @return boolean
-     */
-    boolean createGroup(String groupName);
+/**
+ * User: Seungho Lee (seung7642@gmail.com)
+ * Date: 2020.07.10
+ * Time: 18:40
+ */
+@Slf4j
+@AllArgsConstructor
+@Service
+public class AuthorityManagementService {
 
-    /**
-     * 그룹을 삭제한다.
-     * @param groupName
-     * @param id
-     * @return boolean
-     */
-    boolean deleteGroup(String groupName, String id);
+    private final AuthorityRepository authorityRepository;
+
+    public boolean createGroup(String groupName) {
+//        if (0 > authorityRepository.createGroup(groupName)) {
+//            return false;
+//        }
+
+        return false;
+    }
+
+    public boolean deleteGroup(String groupName, String id) {
+        return false;
+    }
 }

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/authority")
 public class AuthorityManagementController {
 
-//    private final AuthorityManagementService authorityManagementService;
+    private final AuthorityManagementService authorityManagementService;
 
     @PostMapping("/createGroup")
     @ResponseBody
