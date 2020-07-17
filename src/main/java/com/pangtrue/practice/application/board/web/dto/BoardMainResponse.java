@@ -1,4 +1,4 @@
-package com.pangtrue.practice.application.board.dto;
+package com.pangtrue.practice.application.board.web.dto;
 
 import com.pangtrue.practice.application.board.domain.Board;
 import lombok.Getter;

@@ -1,7 +1,11 @@
 package com.pangtrue.practice.application.board.web;
 
-import com.pangtrue.practice.application.board.domain.Board;
+import com.pangtrue.practice.application.board.web.dto.BoardSaveRequest;
+import com.pangtrue.practice.application.board.service.BoardService;
+import com.pangtrue.practice.application.board.web.dto.BoardUpdateRequest;
+import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.commons.exception.NotValidException;
+import com.pangtrue.practice.infrastructure.entity.ResponseBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +37,8 @@ public class BoardController {
 
     @GetMapping("/list")
     @ResponseBody
-    public ResponseEntity list(@PageableDefault(page = 1, size = 10) Pageable pageable) {
-        return ResponseEntity.of(Optional.of(boardService.getArticleList(pageable)));
+    public ResponseBase list(@PageableDefault(page = 1, size = 10) Pageable pageable) {
+        return ResponseBase.of(RETURN_TP.OK, "", boardService.findAllDesc());
     }
 
     @GetMapping("/write")
@@ -45,21 +49,25 @@ public class BoardController {
 
     @PostMapping("/write")
     @ResponseBody
-    public ResponseEntity write(@Valid @RequestBody Board board) {
-        return ResponseEntity.of(Optional.of(boardService.getArticle(boardService.insertArticle(board))));
+    public ResponseBase write(@Valid @RequestBody BoardSaveRequest request) {
+        return ResponseBase.of(RETURN_TP.OK, "", boardService.save(request));
     }
 
-    @GetMapping("/read")
-    @ResponseBody
-    public ResponseEntity read(@RequestParam("idx") Integer idx) {
-        boardService.updateHits(idx);
-        return ResponseEntity.of(Optional.of(boardService.getArticle(idx)));
+    @PutMapping("/update/{idx}")
+    public ResponseBase update(@PathVariable Long idx, @RequestBody BoardUpdateRequest request) {
+        return ResponseBase.of(RETURN_TP.OK, "", boardService.update(idx, request));
     }
 
-    @DeleteMapping("delete")
+    @GetMapping("/read/{idx}")
     @ResponseBody
-    public ResponseEntity delete(@RequestParam("idx") Integer idx) {
-        return ResponseEntity.of(Optional.of(boardService.deleteArticle(idx)));
+    public ResponseBase read(@PathVariable Long idx) {
+        return ResponseBase.of(RETURN_TP.OK, "", boardService.findById(idx));
+    }
+
+    @DeleteMapping("/delete/{idx}")
+    @ResponseBody
+    public ResponseBase delete(@PathVariable Long idx) {
+        return ResponseBase.of(RETURN_TP.OK, "", boardService.delete(idx));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
