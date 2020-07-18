@@ -60,7 +60,7 @@ public class BoardControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    public void Posts_등록된다() throws Exception {
+    public void Board_등록된다() throws Exception {
         String title = "title";
         String content = "content";
         BoardSaveRequest requestDto = BoardSaveRequest.builder()
@@ -83,7 +83,7 @@ public class BoardControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    public void Posts_수정된다() throws Exception {
+    public void Board_수정된다() throws Exception {
         Board savedPosts = boardRepository.save(Board.builder()
                 .title("title")
                 .content("content")
