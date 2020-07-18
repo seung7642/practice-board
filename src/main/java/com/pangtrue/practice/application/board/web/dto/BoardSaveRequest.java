@@ -22,7 +22,7 @@ public class BoardSaveRequest {
         this.author = author;
     }
 
-    public Board toEntity(){
+    public Board toEntity() {
         return Board.builder()
                 .title(title)
                 .content(content)

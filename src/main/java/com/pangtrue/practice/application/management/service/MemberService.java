@@ -1,55 +1,58 @@
 package com.pangtrue.practice.application.management.service;
 
 import com.pangtrue.practice.application.management.domain.Member;
+import com.pangtrue.practice.application.management.domain.MemberRepository;
+import com.pangtrue.practice.application.management.web.dto.MemberRequest;
+import com.pangtrue.practice.commons.utils.PreconditionUtils;
+import com.pangtrue.practice.infrastructure.password.PasswordSafetyChecker;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface MemberService {
+/**
+ * User: SeungHo Lee (seung7642@gmail.com)
+ * Date: 2020. 3. 12.
+ * Time: 오후 11:35
+ */
+@Slf4j
+@AllArgsConstructor
+@Service
+public class MemberService {
 
-    /**
-     * 멤버 리스트를 반환한다.
-     * @return List<Member>
-     */
-    List<Member> getMemberList();
+    private final MemberRepository memberRepository;
+    private final PasswordSafetyChecker passwordSafetyChecker;
 
-    /**
-     * 회원가입을 진행한다.
-     * @param member
-     * @return boolean
-     */
-    boolean signUp(Member member);
+    public List<Member> getMemberList() {
+        return memberRepository.findAll();
+    }
 
-    /**
-     * 회원가입 요청에 대해 id가 중복되는지를 확인한다.
-     * @param id
-     * @return boolean
-     */
-    boolean isEnabledId(String id);
+    public boolean signUp(MemberRequest request) {
+        PreconditionUtils.invalidCondition(request == null, "There is no registration information.");
+        PreconditionUtils.invalidCondition(StringUtils.isBlank(request.getId()), "ID is not valid.");
+        PreconditionUtils.invalidCondition(StringUtils.isBlank(request.getPw()), "Password is not valid.");
+        PreconditionUtils.invalidCondition(StringUtils.isBlank(request.getEmail()), "Email is not valid.");
 
-    /**
-     * id를 삭제한다.
-     * @param id
-     * @return boolean
-     */
-    boolean deleteMember(String id);
 
-    /**
-     * 해당 계정의 정보를 변경한다. (모든 정보에 대한 변경)
-     * @param id
-     * @param currentPassword
-     * @param newName
-     * @param newEmail
-     * @param auth
-     * @return boolean
-     */
-    boolean changeAccount(String id, String currentPassword, String newName, String newEmail, String auth);
 
-    /**
-     * 해당 계정의 패스워드를 변경한다.
-     * @param id
-     * @param currentPassword
-     * @param newPassword
-     * @return boolean
-     */
-    boolean changePassword(String id, String currentPassword, String newPassword);
+        return false;
+    }
+
+    public boolean isEnabledId(String id) {
+        return false;
+    }
+
+    public boolean deleteMember(String id) {
+        return false;
+    }
+
+    public boolean changeAccount(String id, String currentPassword, String newName, String newEmail, String auth) {
+        return false;
+    }
+
+    public boolean changePassword(String id, String currentPassword, String newPassword) {
+        return false;
+    }
 }

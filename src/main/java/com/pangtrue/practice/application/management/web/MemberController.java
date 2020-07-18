@@ -2,6 +2,7 @@ package com.pangtrue.practice.application.management.web;
 
 import com.pangtrue.practice.application.management.domain.Member;
 import com.pangtrue.practice.application.management.service.MemberService;
+import com.pangtrue.practice.application.management.web.dto.MemberRequest;
 import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.commons.exception.MessageException;
 import com.pangtrue.practice.infrastructure.entity.ResponseBase;
@@ -43,9 +44,9 @@ public class MemberController {
 
     @PostMapping("/signUp")
     @ResponseBody
-    public ResponseBase signUp(@RequestBody Member member) {
+    public ResponseBase signUp(@RequestBody MemberRequest request) {
         try {
-            if (memberService.signUp(member)) {
+            if (memberService.signUp(request)) {
                 return ResponseBase.of(RETURN_TP.OK, "Sign up succeeded", null);
             } else {
                 return ResponseBase.of(RETURN_TP.FAIL, "Sign up failed", null);
