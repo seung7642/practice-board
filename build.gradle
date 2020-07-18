@@ -34,9 +34,9 @@ List filters = [
 
 dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-web")
-	testImplementation ("org.springframework.boot:spring-boot-starter-test")
-	implementation ("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1")
 	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation ('org.springframework.boot:spring-boot-starter-oauth2-client')
+	implementation ("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1")
 	implementation ("io.pebbletemplates:pebble-spring-boot-starter:3.1.2")
 
 	implementation ("com.google.guava:guava:29.0-jre")
@@ -52,5 +52,8 @@ dependencies {
 
 	implementation views
 	implementation filters
+
+	testImplementation ("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
