@@ -1,12 +1,15 @@
 package com.pangtrue.practice.application.board.service;
 
-import com.pangtrue.practice.application.board.dao.BoardAttachDao;
 import com.pangtrue.practice.application.board.domain.BoardAttach;
+import com.pangtrue.practice.application.board.domain.BoardAttachRepository;
+import com.pangtrue.practice.application.board.web.dto.BoardAttachMainResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -14,17 +17,16 @@ import java.util.List;
  * Time: 오전 9:50
  */
 @Slf4j
+@AllArgsConstructor
 @Service
-public class UploadDownloadService implements UploadDownloadService {
+public class UploadDownloadService {
 
-    private final BoardAttachDao attachMapper;
+    private final BoardAttachRepository attachRepository;
 
-    @Autowired
-    public UploadDownloadService(BoardAttachDao attachMapper) {
-        this.attachMapper = attachMapper;
-    }
-
-    public List<BoardAttach> getAttachList(int boardIdx) {
-        return attachMapper.findByIdx(boardIdx);
+    @Transactional(readOnly = true)
+    public List<BoardAttachMainResponse> findAllByIdx(Long idx) {
+        return attachRepository.findAllByIdx(idx)
+                .map(BoardAttachMainResponse::new)
+                .collect(Collectors.toList());
     }
 }

@@ -27,7 +27,7 @@ public class BoardAttach {
 
     private boolean fileType;
 
-    private Long boardIdx;
+    private Long idx;
 
     @Builder
     public BoardAttach(String uuid, String uploadPath, String fileName, boolean fileType) {

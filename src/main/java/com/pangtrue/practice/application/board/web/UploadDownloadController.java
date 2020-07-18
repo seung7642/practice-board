@@ -1,8 +1,11 @@
 package com.pangtrue.practice.application.board.web;
 
+import com.pangtrue.practice.application.board.service.UploadDownloadService;
+import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.commons.exception.ResourceNotFoundException;
 import com.pangtrue.practice.commons.utils.DownloadFileUtils;
 import com.pangtrue.practice.commons.utils.UploadFileUtils;
+import com.pangtrue.practice.infrastructure.entity.ResponseBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
@@ -83,7 +86,7 @@ public class UploadDownloadController {
     }
 
     @GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getAttachList(int boardIdx) {
-        return ResponseEntity.of(Optional.of(uploadDownloadService.getAttachList(boardIdx)));
+    public ResponseBase getAttachList(Long idx) {
+        return ResponseBase.of(RETURN_TP.OK, "", uploadDownloadService.findAllByIdx(idx));
     }
 }
