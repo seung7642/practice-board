@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Optional;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -44,7 +45,7 @@ public class LoginService implements HttpSessionBindingListener {
             pw = XssFilterUtils.unescape(pw);
         }
 
-        Member member = memberRepository.findById(id);
+        Member member = memberRepository.findById(id).get();
         PreconditionUtils.invalidCondition(member == null, "You have entered the wrong user name or password. Please check again.");
         PreconditionUtils.invalidCondition(!BCrypt.checkpw(pw, member.getPw()), "You have entered the wrong user name or password. Please check again.");
 
@@ -107,9 +108,9 @@ public class LoginService implements HttpSessionBindingListener {
         return request.getSession(true);
     }
 
-    private void setSession(MemberRequest member) {
+    private void setSession(Member member) {
         // 비밀번호 제외
-        member.setPw("");
+//        member.setPw("");
 
         HttpSession session = newSession(request);
         session.setAttribute(member.getId(), this);

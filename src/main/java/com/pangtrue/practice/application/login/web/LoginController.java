@@ -1,23 +1,14 @@
 package com.pangtrue.practice.application.login.web;
 
-import com.pangtrue.practice.application.login.service.LoginService;
 import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.infrastructure.entity.ResponseBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)

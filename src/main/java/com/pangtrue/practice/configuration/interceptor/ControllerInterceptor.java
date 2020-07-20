@@ -1,9 +1,7 @@
 package com.pangtrue.practice.configuration.interceptor;
 
-import com.pangtrue.practice.application.login.service.LoginService;
 import com.pangtrue.practice.commons.utils.WebUtils;
 import com.pangtrue.practice.infrastructure.annotation.LoginNotRequired;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
