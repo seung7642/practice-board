@@ -1,4 +1,4 @@
-package com.pangtrue.practice.application.board.domain;
+package com.pangtrue.practice.infrastructure.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

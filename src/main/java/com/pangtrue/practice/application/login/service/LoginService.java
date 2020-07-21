@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Optional;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)

@@ -1,5 +1,6 @@
 package com.pangtrue.practice.application.board.domain;
 
+import com.pangtrue.practice.infrastructure.entity.BaseTimeEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

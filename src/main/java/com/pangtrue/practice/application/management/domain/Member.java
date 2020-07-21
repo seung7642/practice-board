@@ -1,12 +1,9 @@
 package com.pangtrue.practice.application.management.domain;
 
+import com.pangtrue.practice.infrastructure.entity.BaseTimeEntity;
 import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldDefaults;
-import org.apache.ibatis.type.Alias;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -15,33 +12,47 @@ import javax.persistence.Id;
  */
 @Getter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    private String pw;
-
-    private String email;
-
+    @Column(nullable = false)
     private String name;
 
-    private String regDate;
+    @Column(nullable = false)
+    private String email;
+
+    @Column
+    private String picture;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    private String pw;
 
     private Integer auth;
 
     private String groupName;
 
     @Builder
-    public Member(String id, String pw, String email, String name, String regDate, Integer auth, String groupName) {
-        this.id = id;
-        this.pw = pw;
-        this.email = email;
+    public Member(String name, String email, String picture, Role role) {
         this.name = name;
-        this.regDate = regDate;
-        this.auth = auth;
-        this.groupName = groupName;
+        this.email = email;
+        this.picture = picture;
+        this.role = role;
+    }
+
+    public Member update(String name, String picture) {
+        this.name = name;
+        this.picture = picture;
+        return this;
+    }
+
+    public String getRoleType() {
+        return this.role.getKey();
     }
 }
