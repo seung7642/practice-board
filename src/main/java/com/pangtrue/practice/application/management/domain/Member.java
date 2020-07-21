@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class Member extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(nullable = false)
@@ -39,11 +38,11 @@ public class Member extends BaseTimeEntity {
     private String groupName;
 
     @Builder
-    public Member(String name, String email, String picture, Role role) {
-        this.name = name;
+    public Member(String id, String pw, String email, String name) {
+        this.id = id;
+        this.pw = pw;
         this.email = email;
-        this.picture = picture;
-        this.role = role;
+        this.name = name;
     }
 
     public Member update(String name, String picture) {

@@ -1,7 +1,10 @@
 package com.pangtrue.practice.configuration;
 
+import com.pangtrue.practice.configuration.auth.LoginUserArgumentResolver;
 import com.pangtrue.practice.configuration.interceptor.ControllerInterceptor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,13 +36,18 @@ public class GlobalConfiguration extends WebMvcConfigurationSupport {
 
     private static final String DEFAULT_RESOURCE_LOCATION = "classpath:/static/";
 
-    public GlobalConfiguration() {
+    private final LoginUserArgumentResolver loginUserArgumentResolver;
+
+    public GlobalConfiguration(LoginUserArgumentResolver loginUserArgumentResolver) {
         log.info("--> Custom WebMvcConfigurationSupport start.");
+
+        this.loginUserArgumentResolver = loginUserArgumentResolver;
     }
 
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(pageableHandlerMethodArgumentResolver());
+        argumentResolvers.add(loginUserArgumentResolver);
     }
 
     @Override
