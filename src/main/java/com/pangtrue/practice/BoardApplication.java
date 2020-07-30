@@ -11,15 +11,8 @@ import java.util.TimeZone;
 public class BoardApplication {
 
 	public static void main(String[] args) {
-
 		// TimeZone Setting
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-
-		// Profile Setting.
-		String profile = System.getProperty("spring.profiles.active");
-		if (null == profile) {
-			System.setProperty("spring.profiles.active", "develop");
-		}
 
 		SpringApplication.run(BoardApplication.class, args);
 	}

@@ -17,12 +17,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
   profiles:
-    include: oauth
-  h2:
-    console:
-      enabled: true
+    include: oauth, production-db
   session:
     store-type: jdbc
 
@@ -41,7 +37,7 @@ pebble:
 
 # LOGGING
 logging:
-#  config: classpath:logback/logback.xml
+  #  config: classpath:logback/logback.xml
   level:
     org.springframework: INFO
     org.springframework.boot: INFO

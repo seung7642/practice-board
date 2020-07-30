@@ -32,3 +32,4 @@ out/
 .vscode/
 
 application-oauth.yml
+application-production-db.yml
