@@ -1,8 +1,14 @@
 # practice-board
 
+## 프로젝트 환경
+
+- Java8
+- Spring Boot 2.1.x
+- Gradle 5.6
+
 ## 패키지 구성
 
-![image](https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png)
+![image](https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png){: width="70%" height="70%"}
 
 
 
