@@ -14,7 +14,13 @@
 
 <br />
 
-## 패키지 구성
+## 프로젝트 구조
+
+### 무중단 배포 구조
+
+<img src="https://user-images.githubusercontent.com/31037742/89186370-a3708780-d5d6-11ea-82ba-4f988e84fbdf.png" width="90%" height="90%">
+
+### 패키지 구조
 
 <img src="https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png" width="70%" height="70%">
 
