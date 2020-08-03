@@ -1,0 +1,7 @@
+spring.jpa.hibernate.ddl-auto: none
+
+spring.datasource:
+  url: jdbc:mariadb://rds주소:포트명(기본은 3306)/practice-board
+  username: 계정명
+  password: 패스워드
+  driver-class-name: org.mariadb.jdbc.Driver
