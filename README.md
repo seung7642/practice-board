@@ -22,7 +22,7 @@
 
 ### 패키지 구조
 
-<img src="https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png" width="70%" height="70%">
+<img src="https://user-images.githubusercontent.com/31037742/87685638-98d48680-c7be-11ea-807a-cb46f5b7a346.png" width="60%" height="60%">
 
 <br />
 
