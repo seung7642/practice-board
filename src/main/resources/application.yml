@@ -2,29 +2,16 @@
 # CORE PROPERTIES
 # -------------------------------
 
-# IDENTITY
-spring.application.name: practice-board
-
 # SPRING
 spring:
+  application.name: practice-board
+  profiles.active: production
   servlet:
     multipart:
       max-file-size: 5MB
       location: /Users/seung7642/pangtrue/board
       max-request-size: 40MB
       file-size-threshold: 20971520
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-  profiles:
-    include: oauth
-  h2:
-    console:
-      enabled: true
-  session:
-    store-type: jdbc
 
 # PEBBLE
 pebble:
@@ -41,7 +28,7 @@ pebble:
 
 # LOGGING
 logging:
-#  config: classpath:logback/logback.xml
+  #  config: classpath:logback/logback.xml
   level:
     org.springframework: INFO
     org.springframework.boot: INFO

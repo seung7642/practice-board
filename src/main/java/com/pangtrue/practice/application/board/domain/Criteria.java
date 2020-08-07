@@ -3,7 +3,6 @@ package com.pangtrue.practice.application.board.domain;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import org.apache.ibatis.type.Alias;
 
 /**
  * User: SeungHo Lee (seung7642@gmail.com)
@@ -12,7 +11,6 @@ import org.apache.ibatis.type.Alias;
  */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Alias("Criteria")
 public class Criteria {
 
     private Integer pageNum;

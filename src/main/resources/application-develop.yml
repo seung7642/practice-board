@@ -1,0 +1,12 @@
+# -------------------------------
+# CORE PROPERTIES
+# -------------------------------
+
+# SPRING
+spring:
+  profiles.include: oauth
+  h2:
+    console:
+      enabled: true
+  session:
+    store-type: jdbc

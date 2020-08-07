@@ -2,7 +2,6 @@ package com.pangtrue.practice.application.board.domain;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.apache.ibatis.type.Alias;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
