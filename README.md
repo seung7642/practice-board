@@ -30,11 +30,11 @@
 
 <img src="https://user-images.githubusercontent.com/31037742/89186370-a3708780-d5d6-11ea-82ba-4f988e84fbdf.png" width="90%" height="90%">
 
-<br />
-
 ## Getting Started
 
-```git clone https://github.com/seung7642/practice-board.git```
+```
+git clone https://github.com/seung7642/practice-board.git
+```
 
 <br />
 
