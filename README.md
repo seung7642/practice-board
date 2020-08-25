@@ -1,6 +1,6 @@
 # practice-board
 
-[![GitHub release](https://img.shields.io/badge/version-1.0.0-blue)](https://GitHub.com/Naereen/StrapDown.js/releases/)[![License: MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/badge/version-1.0.0-blue)](https://GitHub.com/Naereen/StrapDown.js/releases/) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
 
 해당 프로젝트는 웹 서비스 전반을 이해하기 위한 목적으로 만든 연습용 개인 프로젝트입니다.
 
