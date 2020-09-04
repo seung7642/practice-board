@@ -2,6 +2,7 @@ package com.pangtrue.practice.application.web.user;
 
 import com.pangtrue.practice.application.domain.user.Member;
 import com.pangtrue.practice.application.service.user.MemberService;
+import com.pangtrue.practice.application.web.user.dto.MemberRequest;
 import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.commons.exception.MessageException;
 import com.pangtrue.practice.infrastructure.entity.ResponseBase;

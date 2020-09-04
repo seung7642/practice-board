@@ -1,6 +1,7 @@
 package com.pangtrue.practice.application.service.posts;
 
 import com.pangtrue.practice.application.domain.posts.BoardAttachRepository;
+import com.pangtrue.practice.application.web.posts.dto.BoardAttachMainResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

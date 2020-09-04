@@ -2,6 +2,7 @@ package com.pangtrue.practice.application.service.user;
 
 import com.pangtrue.practice.application.domain.user.Member;
 import com.pangtrue.practice.application.domain.user.MemberRepository;
+import com.pangtrue.practice.application.web.user.dto.MemberRequest;
 import com.pangtrue.practice.commons.utils.PreconditionUtils;
 import com.pangtrue.practice.infrastructure.password.PasswordSafetyChecker;
 import lombok.AllArgsConstructor;

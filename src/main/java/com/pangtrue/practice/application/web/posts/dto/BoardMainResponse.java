@@ -2,12 +2,14 @@ package com.pangtrue.practice.application.web.posts.dto;
 
 import com.pangtrue.practice.application.domain.posts.Board;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Getter
+@NoArgsConstructor
 public class BoardMainResponse {
 
     private Long id;

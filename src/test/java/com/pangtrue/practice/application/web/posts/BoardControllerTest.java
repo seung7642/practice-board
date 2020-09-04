@@ -1,4 +1,4 @@
-package com.pangtrue.practice.application.board.web;
+package com.pangtrue.practice.application.web.posts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pangtrue.practice.application.domain.posts.Board;
@@ -60,7 +60,7 @@ public class BoardControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    public void Board_등록된다() throws Exception {
+    public void 게시글_등록된다() throws Exception {
         String title = "title";
         String content = "content";
         BoardSaveRequest requestDto = BoardSaveRequest.builder()
@@ -83,7 +83,7 @@ public class BoardControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    public void Board_수정된다() throws Exception {
+    public void 게시글_수정된다() throws Exception {
         Board savedPosts = boardRepository.save(Board.builder()
                 .title("title")
                 .content("content")

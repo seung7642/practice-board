@@ -1,4 +1,4 @@
-package com.pangtrue.practice.application.board.domain;
+package com.pangtrue.practice.application.domain.posts;
 
 import com.pangtrue.practice.application.domain.posts.BoardRepository;
 import org.junit.After;

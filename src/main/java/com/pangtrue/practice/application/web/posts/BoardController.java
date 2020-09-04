@@ -1,6 +1,8 @@
 package com.pangtrue.practice.application.web.posts;
 
 import com.pangtrue.practice.application.service.posts.BoardService;
+import com.pangtrue.practice.application.web.posts.dto.BoardSaveRequest;
+import com.pangtrue.practice.application.web.posts.dto.BoardUpdateRequest;
 import com.pangtrue.practice.commons.constants.RETURN_TP;
 import com.pangtrue.practice.commons.exception.NotValidException;
 import com.pangtrue.practice.infrastructure.entity.ResponseBase;
@@ -46,7 +48,7 @@ public class BoardController {
 
     @PostMapping("/write")
     @ResponseBody
-    public ResponseBase write(@Valid @RequestBody BoardSaveReqest request) {
+    public ResponseBase write(@Valid @RequestBody BoardSaveRequest request) {
         return ResponseBase.of(RETURN_TP.OK, "", boardService.save(request));
     }
 
