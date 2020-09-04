@@ -6,7 +6,8 @@ branches:
   only:
     - master
 
-# Travis CI 서버의 Home
+# 그레이들을 통해 의존성을 받게 되면 이를 해당 디렉토리에 캐시한다. 그 후 다음 배포 때부터
+# 의존성이 같다면 다시 내려받지 않도록 설정한다.
 cache:
   directories:
     - '$HOME/.m2/repository'
