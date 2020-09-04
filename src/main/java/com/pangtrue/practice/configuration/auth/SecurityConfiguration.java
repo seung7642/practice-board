@@ -1,6 +1,6 @@
 package com.pangtrue.practice.configuration.auth;
 
-import com.pangtrue.practice.application.management.domain.Role;
+import com.pangtrue.practice.application.domain.user.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

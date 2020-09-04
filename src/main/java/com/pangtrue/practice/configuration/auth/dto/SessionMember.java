@@ -1,7 +1,6 @@
 package com.pangtrue.practice.configuration.auth.dto;
 
-import com.pangtrue.practice.application.management.domain.Member;
-import lombok.Builder;
+import com.pangtrue.practice.application.domain.user.Member;
 import lombok.Getter;
 
 import java.io.Serializable;

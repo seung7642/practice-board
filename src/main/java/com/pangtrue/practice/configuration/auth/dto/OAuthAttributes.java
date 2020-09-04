@@ -1,7 +1,7 @@
 package com.pangtrue.practice.configuration.auth.dto;
 
-import com.pangtrue.practice.application.management.domain.Role;
-import com.pangtrue.practice.application.management.domain.User;
+import com.pangtrue.practice.application.domain.user.Role;
+import com.pangtrue.practice.application.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 

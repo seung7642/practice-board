@@ -1,6 +1,6 @@
 package com.pangtrue.practice.configuration.interceptor;
 
-import com.pangtrue.practice.application.login.service.LoginService;
+import com.pangtrue.practice.application.service.user.LoginService;
 import com.pangtrue.practice.commons.utils.WebUtils;
 import com.pangtrue.practice.infrastructure.annotation.LoginNotRequired;
 import lombok.NoArgsConstructor;

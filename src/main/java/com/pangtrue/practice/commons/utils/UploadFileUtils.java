@@ -1,6 +1,6 @@
 package com.pangtrue.practice.commons.utils;
 
-import com.pangtrue.practice.application.board.domain.AttachFile;
+import com.pangtrue.practice.application.domain.posts.AttachFile;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 import net.sf.jmimemagic.Magic;

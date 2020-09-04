@@ -1,10 +1,10 @@
 package com.pangtrue.practice.application.board.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pangtrue.practice.application.board.domain.Board;
-import com.pangtrue.practice.application.board.domain.BoardRepository;
-import com.pangtrue.practice.application.board.web.dto.BoardSaveRequest;
-import com.pangtrue.practice.application.board.web.dto.BoardUpdateRequest;
+import com.pangtrue.practice.application.domain.posts.Board;
+import com.pangtrue.practice.application.domain.posts.BoardRepository;
+import com.pangtrue.practice.application.web.posts.dto.BoardSaveRequest;
+import com.pangtrue.practice.application.web.posts.dto.BoardUpdateRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
